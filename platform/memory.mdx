@@ -1,0 +1,114 @@
+---
+title: "Overlay Memory: save context that persists forever"
+sidebarTitle: "Memory"
+description: "Save durable facts, preferences, and standing instructions that Overlay carries into every future conversation, so you never repeat yourself."
+---
+
+Overlay's memory system lets you store information that persists across all conversations — not just the current thread. When you save a memory, Overlay indexes it and makes it available to the AI in future responses. Over time, your memories accumulate into a personal context layer that shapes how the AI responds to you, so every conversation starts with more useful background than the last.
+
+## What memories are
+
+A memory is a short, durable piece of information attached to your account. Memories survive across sessions, devices, and new conversations. Unlike chat history, which is scoped to a single thread, memories travel with you everywhere in Overlay.
+
+<CardGroup cols={2}>
+  <Card title="Preferences" icon="sliders">
+    Communication style, formatting preferences, response length, language settings, or any standing instruction you want the AI to follow.
+  </Card>
+  <Card title="Facts" icon="circle-info">
+    Specific information the AI should know about you: your role, your organization, your tech stack, or recurring context for your work.
+  </Card>
+  <Card title="Project context" icon="folder">
+    Background on a project the AI should understand — its goals, constraints, audience, or current status.
+  </Card>
+  <Card title="Decisions" icon="check-circle">
+    Choices you've made that should inform future suggestions, so the AI doesn't re-litigate settled questions.
+  </Card>
+</CardGroup>
+
+## Saving a memory
+
+You can save memories in two ways.
+
+<Tabs>
+  <Tab title="From chat">
+    During a conversation, switch to **Act** mode and ask the model to remember something. For example:
+
+    > "Remember that I prefer bullet points over numbered lists."
+
+    The model saves the memory immediately and confirms. It will be available in all future conversations.
+  </Tab>
+  <Tab title="From the Memories view">
+    <Steps>
+      <Step title="Open Memories">
+        Click **Memories** in the left sidebar.
+      </Step>
+      <Step title="Create a new memory">
+        Click the **+ New memory** button.
+      </Step>
+      <Step title="Enter the content">
+        Type the fact, preference, or instruction you want to save. Keep it concise and specific.
+      </Step>
+      <Step title="Save">
+        Click **Save**. The memory is indexed immediately and available in your next conversation.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Editing and deleting memories
+
+Open the **Memories** view to manage your saved memories. Each memory entry shows its content, when it was saved, and how it was created (from chat, from a note, or manually).
+
+- **Edit** — Click the edit icon on any memory to update its content. The updated memory is re-indexed automatically.
+- **Delete** — Click the delete icon to permanently remove a memory. Deleted memories are no longer used in future responses.
+
+<Warning>
+  Deleting a memory is permanent. If you might need the information again, edit it instead of deleting it.
+</Warning>
+
+## Searching memories
+
+Use the search bar in the Memories view to find a specific memory by keyword. Search runs across the full text of all your saved memories.
+
+## How memories shape AI responses
+
+Every time you send a message in Overlay, the system retrieves relevant memories using a combination of semantic and keyword search. The most relevant memories for your current question are injected into the model's context automatically — you do not need to reference them explicitly.
+
+This means:
+
+- The AI knows your preferences without you restating them.
+- Standing instructions ("always format code with comments") apply to every response.
+- Background facts about your work ("I'm building a B2B SaaS for logistics teams") inform answers without requiring a long system prompt every session.
+
+<Info>
+  Memories are retrieved based on relevance to your current message. A memory about your preferred code style is more likely to surface during a coding conversation than a general question.
+</Info>
+
+## Durable vs session context
+
+| Context type | Scope | Persists across sessions |
+|---|---|---|
+| **Memory** | All conversations in your account | Yes |
+| **Thread history** | Single conversation | Yes (within that thread) |
+| **Attached file** | Single message turn | No |
+| **Project context** | All chats inside a project | Yes (within that project) |
+
+## Best practices
+
+<AccordionGroup>
+  <Accordion title="What makes a good memory?">
+    Good memories are specific, accurate, and stable. "I prefer concise bullet-point summaries" is a good memory. "I'm currently researching market sizing" is too transient — use a note for that instead.
+  </Accordion>
+  <Accordion title="How many memories should I save?">
+    There is no strict limit, but aim for quality over quantity. Dozens of highly relevant memories are more useful than hundreds of redundant or overlapping ones. Review and clean up your memories periodically.
+  </Accordion>
+  <Accordion title="Can I use memories for project-specific instructions?">
+    Yes. You can save memories tied to a specific project context. When working inside that project, those memories surface more readily. For heavy project-specific instructions, also consider writing them as a project instruction directly on the project.
+  </Accordion>
+  <Accordion title="Are memories shared across devices?">
+    Yes. Memories are stored in your account and sync across every device and session automatically.
+  </Accordion>
+  <Accordion title="Can the AI save memories on its own?">
+    In Act mode, the AI can save memories when you instruct it to. It does not save memories automatically without your direction.
+  </Accordion>
+</AccordionGroup>

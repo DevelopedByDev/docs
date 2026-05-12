@@ -1,0 +1,100 @@
+---
+title: "Ask vs. Act mode: get answers or take real action"
+sidebarTitle: "Ask & Act"
+description: "Switch between Ask mode for answers and analysis, and Act mode for tool use, external actions, and multi-step automated workflows."
+---
+
+Overlay gives you two distinct ways to work with AI: Ask mode and Act mode. Ask is for thinking — the model reads your question, draws on your saved context, and synthesizes a response. Act is for doing — the model can use tools, call external services, run code, and carry work forward across multiple steps. Knowing when to use each mode makes Overlay significantly more powerful.
+
+## Ask mode
+
+Ask mode is the default for most conversations. Use it when you want the model to reason, explain, draft, analyze, or retrieve information from your workspace.
+
+<CardGroup cols={2}>
+  <Card title="Answer synthesis" icon="lightbulb">
+    The model combines information from your question, memories, and knowledge base to produce a complete, grounded answer.
+  </Card>
+  <Card title="Analysis and explanation" icon="chart-bar">
+    Break down complex topics, compare options, summarize documents, or reason through a problem step by step.
+  </Card>
+  <Card title="Drafting and writing" icon="pen">
+    Write emails, documents, outlines, or code — with your notes and project files available for reference.
+  </Card>
+  <Card title="Retrieval-backed responses" icon="magnifying-glass">
+    The model searches your knowledge base and memories automatically to ground its answers in your actual context.
+  </Card>
+</CardGroup>
+
+## Act mode
+
+Act mode activates tool use. Switch to Act when you need the model to execute steps, not just produce text. In Act mode, the model can call tools on your behalf, chain multiple actions together, and interact with external systems.
+
+<Note>
+  Act mode uses the highest-quality model available from your current selection to handle tool calls reliably. You can see which model is acting in the chat header.
+</Note>
+
+### Tools available in Act mode
+
+<AccordionGroup>
+  <Accordion title="Memory and knowledge tools">
+    The model can read, create, update, and delete your memories and knowledge entries. This means you can ask it to "remember that my preferred tone is concise" and it will save that memory automatically, or ask it to search your knowledge base and synthesize an answer from what it finds.
+  </Accordion>
+  <Accordion title="Note management">
+    Create, update, and organize notes directly from chat. Ask the model to draft a note and save it, or to pull content from an existing note into the conversation.
+  </Accordion>
+  <Accordion title="External integrations">
+    With integrations connected (Gmail, Google Calendar, Notion, GitHub, Slack, and 100+ others via Composio), Act mode can read, write, and trigger actions in those apps. For example: draft and send an email, add a calendar event, create a GitHub issue, or update a Notion page.
+  </Accordion>
+  <Accordion title="Browser automation">
+    The model can launch a browser session to browse live websites, inspect pages, and complete interactive web tasks. This gives you access to real-time information and lets you delegate web work in natural language.
+  </Accordion>
+  <Accordion title="Code execution">
+    Run code in a persistent Daytona sandbox. Ask the model to write and execute a script, process data, or run CLI commands — results come back directly into the chat.
+  </Accordion>
+  <Accordion title="Web search and retrieval">
+    The model can search the web and retrieve content from URLs to supplement your request with fresh information from outside your workspace.
+  </Accordion>
+</AccordionGroup>
+
+## How to switch modes
+
+<Steps>
+  <Step title="Open a chat thread">
+    Start a new conversation or open an existing one.
+  </Step>
+  <Step title="Find the mode toggle">
+    Look for the Ask / Act toggle in the chat input toolbar.
+  </Step>
+  <Step title="Select the mode">
+    Click **Ask** for answer synthesis or **Act** to enable tool use. The indicator updates immediately.
+  </Step>
+  <Step title="Send your message">
+    Type your request normally. In Act mode, the model will decide which tools to invoke based on your message and execute them automatically.
+  </Step>
+</Steps>
+
+## When to use each mode
+
+| Situation | Recommended mode |
+|---|---|
+| Drafting a document or email | Ask |
+| Explaining a concept or analyzing a document | Ask |
+| Searching your knowledge base for information | Ask |
+| Sending an email via Gmail | Act |
+| Adding a task to Notion or Asana | Act |
+| Browsing a live website for current information | Act |
+| Running a script or shell command | Act |
+| Saving or updating a memory | Act |
+| Multi-step workflows with external tools | Act |
+
+<Tip>
+  Start in Ask mode when you are not sure which to use. If you find yourself saying "now go do that," switch to Act.
+</Tip>
+
+<Warning>
+  Act mode executes real actions in connected apps. Before asking the model to send emails, post to social media, or modify files in external services, confirm your integrations are connected and the instructions are correct.
+</Warning>
+
+## Automations
+
+Repeated Act mode workflows can be saved as automations that run on a schedule — daily, weekly, or at a custom interval. Set up an automation from the Automations area and Overlay will execute the workflow on your behalf without manual prompting.

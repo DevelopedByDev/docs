@@ -1,0 +1,227 @@
+---
+title: "Troubleshoot common problems with self-hosted Overlay"
+sidebarTitle: "Troubleshooting"
+description: "Diagnose and resolve the most common self-hosting problems: auth failures, session mismatches, Stripe webhooks, Convex connection errors, and more."
+---
+
+Most self-hosting issues trace back to mismatched secrets, misconfigured redirect URIs, or a Convex deployment that is either missing environment variables or pointing at the wrong backend. The sections below cover the most common failure modes and how to resolve them. Start by running `npx convex env list` and comparing the output against the values in your `.env.local` — many problems become obvious at that step.
+
+<AccordionGroup>
+
+<Accordion title='"MissingAccessToken" error when deploying to Convex'>
+
+**Symptom:** Running a Convex deploy command returns `MissingAccessToken` or similar authentication failure.
+
+**Cause:** You passed `.env.local` to the deploy command, or your shell has `CONVEX_DEPLOYMENT` set to your dev slug. When the CLI uses the dev deployment name, it targets the dev API, which rejects production credentials.
+
+**Fix:** Never pass `.env.local` directly to `convex deploy`. Use the npm scripts defined in the repository, which load the correct environment file for each target:
+
+```bash
+# Production — uses the production deployment credentials
+npm run convex:push:prod
+
+# Development — uses .env.development.local
+npm run convex:push:dev
+
+# Both at once
+npm run convex:push:all
+```
+
+If you need to run `npx convex deploy` directly, unset `CONVEX_DEPLOYMENT` from your shell first or use the `-y` flag without any env file:
+
+```bash
+npx convex deploy -y
+```
+
+</Accordion>
+
+<Accordion title="Session errors — users are logged out unexpectedly or login fails silently">
+
+**Symptom:** Users sign in through WorkOS but are immediately redirected back to the login page, or session cookies appear to be set but authentication fails on the next request.
+
+**Cause:** The three session secrets — `SESSION_SECRET`, `SESSION_TRANSFER_KEY`, and `SESSION_COOKIE_ENCRYPTION_KEY` — do not match between your Next.js environment (`.env.local`) and your Convex deployment. When the values differ, Convex cannot verify the tokens that Next.js generates, and vice versa.
+
+**Fix:** Verify the values match in both places. Check what Convex has:
+
+```bash
+npx convex env list
+```
+
+Compare the output against the corresponding values in your `.env.local`. If they differ, set fresh matching values in both:
+
+```bash
+# Generate a new shared value
+NEW_KEY=$(openssl rand -hex 32)
+
+# Set it in Convex
+npx convex env set SESSION_TRANSFER_KEY "$NEW_KEY"
+
+# Then copy the same value into .env.local:
+# SESSION_TRANSFER_KEY=<same value>
+```
+
+Repeat for `SESSION_COOKIE_ENCRYPTION_KEY`. After updating, restart your dev server and test the login flow again.
+
+</Accordion>
+
+<Accordion title="Stripe webhook failures — payments do not reflect in the app">
+
+**Symptom:** Stripe sends webhook events (visible in the Stripe dashboard under Webhooks → Recent deliveries) but the app does not respond — subscriptions do not activate, or credits do not update.
+
+**Cause:** The `STRIPE_WEBHOOK_SECRET` in your environment does not match the signing secret configured for your webhook endpoint in the Stripe dashboard. Stripe signs every request with this secret, and the app rejects requests whose signatures don't verify.
+
+**Fix:**
+
+1. In the Stripe dashboard, go to **Developers → Webhooks** and open your endpoint.
+2. Click **Reveal** next to the signing secret (starts with `whsec_`).
+3. Copy the exact value into your environment:
+
+```env
+STRIPE_WEBHOOK_SECRET=whsec_...
+```
+
+For production, set it in your Vercel environment variables and redeploy. For local development, use the Stripe CLI to forward events, which generates its own short-lived signing secret:
+
+```bash
+stripe listen --forward-to localhost:3000/api/webhooks/stripe
+```
+
+The CLI will print the webhook secret to use for local testing. Set that value as `DEV_STRIPE_WEBHOOK_SECRET` in `.env.local`.
+
+</Accordion>
+
+<Accordion title="Convex connection fails or the app shows no data">
+
+**Symptom:** The app loads but shows empty state everywhere, or the browser console shows failed requests to `convex.cloud`.
+
+**Cause:** The Convex URL in `.env.local` is incorrect, the backend has not been pushed yet, or the Convex deployment is unhealthy.
+
+**Fix:** Start by running the Convex dev watcher and watching its output:
+
+```bash
+npx convex dev
+```
+
+If it connects successfully, you will see function listings. If it fails, the error message will indicate whether the problem is an invalid URL, missing credentials, or a function error.
+
+Check that the URL values in your `.env.local` match the actual deployment slugs in your Convex dashboard:
+
+```env
+NEXT_PUBLIC_CONVEX_URL=https://<prod-slug>.convex.cloud
+DEV_NEXT_PUBLIC_CONVEX_URL=https://<dev-slug>.convex.cloud
+```
+
+If the backend functions are missing, push them again:
+
+```bash
+npm run convex:push:dev
+```
+
+</Accordion>
+
+<Accordion title="WorkOS authentication fails — redirect URI mismatch">
+
+**Symptom:** WorkOS returns an error like `redirect_uri_mismatch` or the auth callback URL returns a 404.
+
+**Cause:** The redirect URI that WorkOS received does not exactly match one of the URIs registered in your WorkOS dashboard.
+
+**Fix:** Go to your WorkOS dashboard and verify that both of these URIs are registered:
+
+| Environment | URI |
+|---|---|
+| Production | `https://your-domain.com/api/auth/callback` |
+| Development | `http://localhost:3000/api/auth/callback` |
+
+The URIs are compared exactly — a trailing slash, `http` vs `https`, or `www` prefix will cause a mismatch. Make sure `NEXT_PUBLIC_APP_URL` and `DEV_NEXT_PUBLIC_APP_URL` in your `.env.local` use the same scheme and hostname you registered.
+
+</Accordion>
+
+<Accordion title="Chat does not respond — AI provider errors">
+
+**Symptom:** Sending a message in chat results in an error, a blank response, or an error message mentioning an invalid API key or rate limit.
+
+**Cause:** No valid AI provider key is set, or the key you set is invalid or expired.
+
+**Fix:** Verify that at least one of the following is set in your `.env.local` with a valid, active key:
+
+```env
+AI_GATEWAY_API_KEY=vgw_...
+OPENROUTER_API_KEY=sk-or-...
+GROQ_API_KEY=gsk_...
+NVIDIA_API_KEY=nvapi-...
+```
+
+Test a clean build to surface any startup-time environment validation errors:
+
+```bash
+npm run build
+```
+
+If you are using Vercel AI Gateway, confirm that the Gateway has active provider credentials configured in the Vercel dashboard for the models you are trying to use. The Gateway key itself being valid does not guarantee the downstream provider keys are set.
+
+</Accordion>
+
+<Accordion title="Build fails after making backend changes">
+
+**Symptom:** `npm run build` fails with type errors or import errors after you modify files inside `convex/`.
+
+**Cause:** The Convex-generated types are out of date. When you change the schema or function signatures in `convex/`, the TypeScript types that Next.js imports from the Convex client are no longer accurate until you push the backend.
+
+**Fix:** Push both deployments to regenerate the types, then rebuild:
+
+```bash
+npm run convex:push:all
+npm run build
+```
+
+If the build still fails, run the linter separately to get more targeted error output:
+
+```bash
+npm run lint
+```
+
+</Accordion>
+
+<Accordion title="R2 file uploads fail or files are not accessible">
+
+**Symptom:** Uploading files to the knowledge base returns an error, or uploaded files return 403/404 when accessed.
+
+**Cause:** R2 credentials are missing, incorrect, or the bucket does not have the correct permissions for the API token you created.
+
+**Fix:** Verify all R2 variables are set:
+
+```env
+R2_ACCOUNT_ID=...
+R2_BUCKET_NAME=overlay-files
+R2_ACCESS_KEY_ID=...
+R2_SECRET_ACCESS_KEY=...
+S3_API=https://<account>.r2.cloudflarestorage.com
+```
+
+In the Cloudflare dashboard, confirm that the R2 API token has **Object Read & Write** permissions scoped to your bucket. If you are using presigned URLs, check that `R2_PRESIGN_TTL_SECONDS` is not set to a very low value that causes links to expire before they can be used (default is `3600`).
+
+</Accordion>
+
+</AccordionGroup>
+
+## General diagnostic commands
+
+Run these to gather information before filing an issue or digging deeper into a specific failure:
+
+```bash
+# Watch the Convex backend and see live function logs
+npx convex dev
+
+# List all Convex environment variables for your deployment
+npx convex env list
+
+# Run a production build and surface build errors
+npm run build
+
+# Run the linter
+npm run lint
+```
+
+<Tip>
+  If you're stuck on a problem that isn't covered here, check the repository's issue tracker at [github.com/DevelopedByDev/overlay-web](https://github.com/DevelopedByDev/overlay-web) or open a new issue with the output of `npx convex env list` (with secrets redacted) and the full error message you're seeing.
+</Tip>

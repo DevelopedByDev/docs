@@ -1,0 +1,67 @@
+---
+title: "Self-hosting Overlay: architecture and requirements"
+sidebarTitle: "Overview"
+description: "Run your own Overlay instance with full control over data, infrastructure, and models. Overlay is open source, self-hostable, and deploys to Vercel."
+---
+
+Overlay is fully open source and designed to be self-hosted. Running your own instance gives you complete control over where your data lives, which AI providers you connect, and how the workspace is configured for your team. Whether you're driven by compliance requirements, a preference for data sovereignty, or simply the desire to customize every layer of the stack, self-hosting puts you in charge.
+
+## Why self-host
+
+**Data sovereignty.** All chat history, memories, knowledge base files, and user data live in your own Convex deployment. Nothing is shared with Overlay's cloud unless you explicitly configure it.
+
+**Model flexibility.** Connect any AI provider you choose — OpenAI, Anthropic, Google, xAI, Groq, OpenRouter, NVIDIA, or route everything through a single Vercel AI Gateway key. You're not locked into a provider list.
+
+**Customization.** Because Overlay is open source, you can modify the frontend, backend logic, and integrations to fit your exact needs. Fork the repo, adapt the codebase, and ship your own version.
+
+**Cost control.** Use your own API keys and billing accounts. Pay providers directly at the rates you negotiate, with no markup from a managed platform.
+
+## Architecture
+
+Overlay is composed of a small set of core services and several optional add-ons. The table below reflects the full stack.
+
+| Component | Technology | Required |
+|---|---|---|
+| Frontend & API | Next.js 15 | Yes |
+| Backend & Database | Convex | Yes |
+| Authentication | WorkOS | Yes |
+| AI Inference | Vercel AI Gateway (or OpenRouter / Groq) | Yes — at least one |
+| Billing | Stripe | No |
+| File Storage | Cloudflare R2 | No |
+| App Integrations | Composio | No |
+| Browser Automation | Browser Use | No |
+| Code Execution | Daytona | No |
+| Monitoring | Sentry / PostHog | No |
+
+The **Next.js** app handles the user interface and API routes. **Convex** backs all database queries, mutations, scheduled jobs, and HTTP routes — it is the source of truth for your deployment. **WorkOS** provides enterprise-grade authentication and SSO. At least one AI provider key is required before chat will work.
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+- **Node.js 20 or later** and **npm** installed locally
+- A [Convex](https://convex.dev) account with two deployments ready (one for development, one for production)
+- A [WorkOS](https://workos.com) account with redirect URIs configured
+- An API key for at least one AI provider (Vercel AI Gateway is recommended)
+- Git, to clone the repository
+
+Optional services (Stripe, Cloudflare R2, Composio, Browser Use, Daytona, Sentry, PostHog) can be added at any time after the core setup is complete.
+
+## Setup at a glance
+
+The full deployment process covers four main stages:
+
+1. **Clone and configure** — clone the GitHub repository, copy `.env.example` to `.env.local`, and fill in your credentials.
+2. **Set up Convex** — create dev and prod deployments, push the backend schema, and set your Convex environment variables.
+3. **Configure WorkOS** — add the correct redirect URIs for both local development and production.
+4. **Connect an AI provider** — add at least one provider API key so chat requests can be routed.
+
+Once those stages are complete, you can run the development server locally with `npm run dev` or deploy to production on Vercel. Follow the [Deployment guide](/self-hosting/deployment) for step-by-step instructions and all required commands.
+
+## GitHub repository
+
+The full source code is available at [github.com/DevelopedByDev/overlay-web](https://github.com/DevelopedByDev/overlay-web). The repository includes the Next.js frontend, the Convex backend, and all the code you need to run your own instance.
+
+<Note>
+  Before sharing or publishing a fork of the repository, rotate all generated secrets and remove any real credentials from your environment files. Never commit `.env.local` or any file containing real secrets.
+</Note>

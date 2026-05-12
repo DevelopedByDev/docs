@@ -1,0 +1,268 @@
+---
+title: "Environment variables reference for self-hosted Overlay"
+sidebarTitle: "Configuration"
+description: "All required and optional environment variables for a self-hosted Overlay instance, including how to generate secrets and set Convex environment variables."
+---
+
+Overlay reads its configuration from two places: a `.env.local` file loaded by Next.js, and environment variables set directly in your Convex deployments. Some values need to appear in both places because the Next.js app and the Convex backend each need access to shared secrets at runtime. This page documents every variable, how to generate the ones that require random secrets, and how to push the right values to Convex.
+
+## Generating secrets
+
+Several variables require cryptographically random values. Generate each one independently using `openssl`:
+
+```bash
+openssl rand -hex 32
+```
+
+Run that command once per secret — never reuse the same value for different variables. The commands in the [Deployment guide](/self-hosting/deployment) include inline secret generation using command substitution so you can set and store them in a single step.
+
+## Required environment variables
+
+These variables must be present before the app will start or authenticate correctly.
+
+### Convex connection
+
+<ParamField path="NEXT_PUBLIC_CONVEX_URL" type="string" required>
+  The URL of your **production** Convex deployment. Format: `https://<prod-slug>.convex.cloud`
+</ParamField>
+
+<ParamField path="DEV_NEXT_PUBLIC_CONVEX_URL" type="string" required>
+  The URL of your **development** Convex deployment. Format: `https://<dev-slug>.convex.cloud`
+</ParamField>
+
+<ParamField path="CONVEX_DEPLOYMENT" type="string" required>
+  The deployment name used by the Convex CLI when pushing backend changes.
+</ParamField>
+
+<ParamField path="NEXT_PUBLIC_CONVEX_SITE_URL" type="string" required>
+  The HTTP actions URL for your production deployment. Format: `https://<prod-slug>.convex.site`
+</ParamField>
+
+### App URLs
+
+<ParamField path="NEXT_PUBLIC_APP_URL" type="string" required>
+  Your production domain. Example: `https://your-domain.com`
+</ParamField>
+
+<ParamField path="DEV_NEXT_PUBLIC_APP_URL" type="string" required>
+  Your local development URL. Example: `http://localhost:3000`
+</ParamField>
+
+### WorkOS authentication
+
+<ParamField path="WORKOS_CLIENT_ID" type="string" required>
+  Your production WorkOS client ID. Starts with `client_`.
+</ParamField>
+
+<ParamField path="WORKOS_API_KEY" type="string" required>
+  Your production WorkOS API key. Starts with `sk_`.
+</ParamField>
+
+<ParamField path="DEV_WORKOS_CLIENT_ID" type="string" required>
+  Your development WorkOS client ID (recommended to use separate dev credentials).
+</ParamField>
+
+<ParamField path="DEV_WORKOS_API_KEY" type="string" required>
+  Your development WorkOS API key.
+</ParamField>
+
+### Secrets
+
+Generate each of these with `openssl rand -hex 32`. All are 64-character hex strings.
+
+<ParamField path="SESSION_SECRET" type="string" required>
+  Signs session cookies. Must match between Next.js and Convex environments.
+</ParamField>
+
+<ParamField path="SESSION_TRANSFER_KEY" type="string" required>
+  Used to transfer session state securely. Must match between Next.js and Convex.
+</ParamField>
+
+<ParamField path="SESSION_COOKIE_ENCRYPTION_KEY" type="string" required>
+  Encrypts the session cookie payload. Must match between Next.js and Convex.
+</ParamField>
+
+<ParamField path="INTERNAL_API_SECRET" type="string" required>
+  Authenticates internal server-to-server calls between Next.js API routes and Convex.
+</ParamField>
+
+<ParamField path="INTERNAL_SERVICE_AUTH_SECRET" type="string" required>
+  Authenticates background service calls. Keep this strictly server-side.
+</ParamField>
+
+<ParamField path="PROVIDER_KEYS_SECRET" type="string" required>
+  Encrypts AI provider API keys stored in Convex. Never expose this value client-side.
+</ParamField>
+
+<ParamField path="HOOKS_TOKEN_SALT" type="string" required>
+  Salts webhook and automation hook tokens to prevent forgery.
+</ParamField>
+
+<Warning>
+  The three session secrets (`SESSION_SECRET`, `SESSION_TRANSFER_KEY`, `SESSION_COOKIE_ENCRYPTION_KEY`) must have the same values in both your `.env.local` file and your Convex deployment environment. A mismatch causes session validation failures and broken login flows.
+</Warning>
+
+### AI providers (at least one required)
+
+<ParamField path="AI_GATEWAY_API_KEY" type="string">
+  Vercel AI Gateway API key. Starts with `vgw_`. Recommended — gives you access to 20+ providers through a single key.
+</ParamField>
+
+<ParamField path="OPENROUTER_API_KEY" type="string">
+  OpenRouter API key. Starts with `sk-or-`. Alternative to Vercel AI Gateway; provides access to 200+ models.
+</ParamField>
+
+<ParamField path="GROQ_API_KEY" type="string">
+  Groq API key. Starts with `gsk_`. Useful for ultra-fast inference on open models.
+</ParamField>
+
+<ParamField path="NVIDIA_API_KEY" type="string">
+  NVIDIA API key. Starts with `nvapi-`. Includes free access to DeepSeek V3.2 and Kimi K2 Thinking.
+</ParamField>
+
+Here is the full required block for your `.env.local`:
+
+```env
+# Convex
+NEXT_PUBLIC_CONVEX_URL=https://<prod-slug>.convex.cloud
+DEV_NEXT_PUBLIC_CONVEX_URL=https://<dev-slug>.convex.cloud
+CONVEX_DEPLOYMENT=<deployment-name>
+NEXT_PUBLIC_CONVEX_SITE_URL=https://<prod-slug>.convex.site
+
+# App URLs
+NEXT_PUBLIC_APP_URL=https://your-domain.com
+DEV_NEXT_PUBLIC_APP_URL=http://localhost:3000
+
+# WorkOS
+WORKOS_CLIENT_ID=client_...
+WORKOS_API_KEY=sk_...
+DEV_WORKOS_CLIENT_ID=client_...
+DEV_WORKOS_API_KEY=sk_...
+
+# Secrets (generate with: openssl rand -hex 32)
+SESSION_SECRET=<64-char-hex>
+SESSION_TRANSFER_KEY=<64-char-hex>
+SESSION_COOKIE_ENCRYPTION_KEY=<64-char-hex>
+INTERNAL_API_SECRET=<64-char-hex>
+INTERNAL_SERVICE_AUTH_SECRET=<64-char-hex>
+PROVIDER_KEYS_SECRET=<64-char-hex>
+HOOKS_TOKEN_SALT=<64-char-hex>
+
+# AI — at least one required
+AI_GATEWAY_API_KEY=vgw_...
+# OPENROUTER_API_KEY=sk-or-...
+# GROQ_API_KEY=gsk_...
+# NVIDIA_API_KEY=nvapi-...
+```
+
+## Setting Convex environment variables
+
+Convex environment variables are set using the CLI, not through `.env.local`. Run each `npx convex env set` command after your deployments are created:
+
+```bash
+npx convex env set INTERNAL_API_SECRET "$(openssl rand -hex 32)"
+npx convex env set PROVIDER_KEYS_SECRET "$(openssl rand -hex 32)"
+npx convex env set HOOKS_TOKEN_SALT "$(openssl rand -hex 32)"
+npx convex env set WORKOS_API_KEY "sk_..."
+npx convex env set WORKOS_CLIENT_ID "client_..."
+npx convex env set SESSION_TRANSFER_KEY "$(openssl rand -hex 32)"
+npx convex env set SESSION_COOKIE_ENCRYPTION_KEY "$(openssl rand -hex 32)"
+```
+
+<Warning>
+  Copy the generated values for `SESSION_TRANSFER_KEY` and `SESSION_COOKIE_ENCRYPTION_KEY` into your `.env.local` as well. These secrets must be identical in both environments.
+</Warning>
+
+To verify which variables are currently set on your Convex deployment, run:
+
+```bash
+npx convex env list
+```
+
+## Optional environment variables
+
+Add these only for the services you intend to use. None are required for the core chat and workspace experience.
+
+### Stripe (billing)
+
+```env
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+STRIPE_PAID_UNIT_PRICE_ID=price_...
+STRIPE_TOPUP_UNIT_PRICE_ID=price_...
+STRIPE_PORTAL_CONFIGURATION_ID=bpc_...
+
+DEV_STRIPE_SECRET_KEY=sk_test_...
+DEV_STRIPE_WEBHOOK_SECRET=whsec_...
+DEV_STRIPE_PAID_UNIT_PRICE_ID=price_...
+DEV_STRIPE_TOPUP_UNIT_PRICE_ID=price_...
+DEV_STRIPE_PORTAL_CONFIGURATION_ID=bpc_...
+```
+
+Stripe expects two products with these lookup keys: `pro_monthly` ($20/month) and `max_monthly` ($100/month). Set your webhook endpoint to `https://your-domain.com/api/webhooks/stripe`.
+
+### Cloudflare R2 (file storage)
+
+```env
+R2_ACCOUNT_ID=...
+R2_BUCKET_NAME=overlay-files
+R2_ACCESS_KEY_ID=...
+R2_SECRET_ACCESS_KEY=...
+R2_GLOBAL_BUDGET_BYTES=1099511627776
+R2_PRESIGN_TTL_SECONDS=3600
+S3_API=https://<account>.r2.cloudflarestorage.com
+```
+
+R2 enables the knowledge base file upload and generated media storage features. `R2_GLOBAL_BUDGET_BYTES` defaults to 1 TB; set it lower if you want a hard cap.
+
+### Composio (app integrations)
+
+```env
+COMPOSIO_API_KEY=
+```
+
+Required if you want the 100+ external app integrations (Gmail, Notion, GitHub, etc.) available in the Integrations workspace area.
+
+### Browser Use (browser automation)
+
+```env
+BROWSER_USE_API_KEY=
+```
+
+Required for AI-controlled browser sessions.
+
+### Daytona (code execution)
+
+```env
+DAYTONA_API_KEY=
+DAYTONA_API_URL=https://app.daytona.io/api
+```
+
+Required for the Daytona sandbox code execution feature.
+
+### Sentry (error tracking)
+
+```env
+SENTRY_DSN=https://...@sentry.io/...
+NEXT_PUBLIC_SENTRY_DSN=https://...@sentry.io/...
+SENTRY_AUTH_TOKEN=sntrys_...
+SENTRY_ORG=your-org
+SENTRY_PROJECT=overlay
+```
+
+`NEXT_PUBLIC_SENTRY_DSN` should be the same value as `SENTRY_DSN`. The `NEXT_PUBLIC_` prefix makes it available to the client-side bundle for browser error reporting.
+
+### PostHog (analytics)
+
+```env
+NEXT_PUBLIC_POSTHOG_TOKEN=phc_...
+NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com
+```
+
+## Public vs. private variables
+
+Any variable prefixed with `NEXT_PUBLIC_` is embedded in the client-side JavaScript bundle and visible to anyone who inspects your app. Treat every other variable as a server secret.
+
+<Info>
+  Variables that must remain strictly server-side include `PROVIDER_KEYS_SECRET`, `INTERNAL_API_SECRET`, `INTERNAL_SERVICE_AUTH_SECRET`, `SESSION_SECRET`, `SESSION_TRANSFER_KEY`, `SESSION_COOKIE_ENCRYPTION_KEY`, all Stripe keys, and all provider API keys. Never reference these in client components or expose them through public API routes.
+</Info>

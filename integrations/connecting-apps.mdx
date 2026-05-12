@@ -1,0 +1,70 @@
+---
+title: "Connect, authorize, and manage integrations in Overlay"
+sidebarTitle: "Connecting apps"
+description: "Step-by-step guide to connecting, authorizing, disconnecting, and troubleshooting any of Overlay's 100+ external app integrations using OAuth."
+---
+
+Overlay's integrations page is where you connect external apps to your workspace. Every app you connect becomes available as a tool in Act mode, letting the AI take real action on your behalf — sending messages, reading calendars, creating issues, and more.
+
+## Connect an app
+
+<Steps>
+  <Step title="Open the Integrations page">
+    Navigate to **Integrations** in the left sidebar. You will see two sections: **Connected** (apps you have already authorized) and **Available** (apps ready to connect).
+  </Step>
+  <Step title="Find the app">
+    Scroll through the available list, or click the search icon at the top right of the Integrations page and type the app name. If you do not see the app in the default list, click **Add** to open the full integration catalog and search across all 100+ Composio-backed apps.
+  </Step>
+  <Step title="Click Connect">
+    Click the **Connect** button next to the app. Overlay opens a new browser tab with the app's OAuth authorization screen.
+  </Step>
+  <Step title="Authorize the app">
+    Follow the authorization prompts in the new tab. Grant the permissions Overlay requests. When authorization is complete, the tab closes and the app appears in your **Connected** list.
+  </Step>
+  <Step title="Use the app in Act mode">
+    Switch any chat to **Act mode** using the toggle in the chat input. You can now ask the AI to take actions in the connected app.
+  </Step>
+</Steps>
+
+<Tip>
+  If the OAuth tab does not open, check that your browser is not blocking pop-ups from Overlay. Allow pop-ups for `getoverlay.io` and try again.
+</Tip>
+
+## Disconnect an app
+
+To revoke Overlay's access to a connected app:
+
+1. Go to **Integrations** in the sidebar.
+2. Find the app in the **Connected** section.
+3. Click **Disconnect**.
+
+Overlay removes the connection immediately. The AI will no longer be able to call tools for that app. Revoking access in Overlay does not automatically revoke the OAuth grant on the app's side — if you want to fully remove Overlay's authorization, also visit the app's own account settings (for example, Google's third-party app permissions page) and revoke it there.
+
+## Check which apps are connected
+
+Your connected apps are listed at the top of the **Integrations** page under the **Connected** heading. You can also use the search bar to filter them by name.
+
+## Troubleshoot a failed connection
+
+<AccordionGroup>
+  <Accordion title="The OAuth tab opened but I was redirected back with an error">
+    The app's authorization server rejected the request. Common causes:
+
+    - You denied a required permission during the OAuth flow — reconnect and accept all requested permissions.
+    - Your account does not have access to the feature the integration needs (for example, a read-only Google Workspace account may not allow third-party app access).
+    - A temporary error on the app's side — wait a few minutes and try again.
+  </Accordion>
+  <Accordion title="The app shows as Connected but actions fail in Act mode">
+    The token may have expired or been revoked. Try disconnecting the app and reconnecting to issue a fresh OAuth token. If the problem persists, check whether you changed your password or revoked app access in the external service's settings.
+  </Accordion>
+  <Accordion title="I connected the app but I cannot see it working in chat">
+    Make sure you are in **Act mode**, not Ask mode. Integrations are only available when Act mode is active. Switch using the mode toggle in the chat input bar.
+  </Accordion>
+  <Accordion title="The OAuth pop-up closed immediately without authorizing">
+    Your browser may have blocked the pop-up window. Allow pop-ups for `getoverlay.io` in your browser settings and try connecting again.
+  </Accordion>
+</AccordionGroup>
+
+<Warning>
+  Disconnecting an app will immediately stop the AI from being able to take actions in that app. Any automations that rely on the integration will also stop working until you reconnect.
+</Warning>

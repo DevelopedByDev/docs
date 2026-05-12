@@ -1,0 +1,81 @@
+---
+title: "Work with GitHub pull requests and issues in Overlay"
+sidebarTitle: "GitHub"
+description: "Connect GitHub to list pull requests, read and create issues, review file contents, and search repositories — all from Act mode in Overlay chat."
+---
+
+The GitHub integration lets Overlay's AI work directly with your repositories. From Act mode, you can list pull requests, read and create issues, review file contents, and search across your GitHub account — without leaving Overlay.
+
+## What you can do
+
+<CardGroup cols={2}>
+  <Card title="List pull requests" icon="git-pull-request">
+    View open, closed, or merged PRs across any repository.
+  </Card>
+  <Card title="Read issues" icon="alert-circle">
+    Retrieve issue details, comments, labels, and status.
+  </Card>
+  <Card title="Create issues" icon="plus-circle">
+    Open new issues with a title, body, and labels.
+  </Card>
+  <Card title="Read file contents" icon="file-code">
+    Access the contents of any file in a repository.
+  </Card>
+  <Card title="Search repositories" icon="search">
+    Find repos, issues, or code across your GitHub account.
+  </Card>
+  <Card title="Summarize activity" icon="bar-chart-2">
+    Get a summary of recent PRs, issues, or commits in plain language.
+  </Card>
+</CardGroup>
+
+## How to connect GitHub
+
+<Steps>
+  <Step title="Open Integrations">
+    Click **Integrations** in the left sidebar.
+  </Step>
+  <Step title="Find GitHub">
+    Locate **GitHub** in the Available list or search for it.
+  </Step>
+  <Step title="Click Connect">
+    Click **Connect**. A new tab opens with GitHub's OAuth screen.
+  </Step>
+  <Step title="Authorize Overlay">
+    Review the requested permissions and click **Authorize**. If your repositories are in a GitHub organization, you may also need to grant access to that organization.
+  </Step>
+  <Step title="Start using it">
+    Switch to Act mode in any chat to query or interact with your GitHub repositories.
+  </Step>
+</Steps>
+
+<Note>
+  If you belong to a GitHub organization with SAML SSO enabled, you may need to authorize the OAuth app for that organization after connecting. Visit your GitHub organization settings to complete this step.
+</Note>
+
+## Example prompts
+
+Use these in Act mode to get started:
+
+- "List my open pull requests."
+- "Summarize the merged PRs in the `overlay-web` repo from this week."
+- "Show me the open issues in `my-org/my-repo` labeled 'bug'."
+- "Create an issue in `my-repo` titled 'Fix null pointer in auth flow' with a description of the problem."
+- "What does the file `src/lib/models.ts` contain in the `overlay-web` repo?"
+- "Search my GitHub for repositories related to 'AI workspace'."
+- "How many open issues does the `overlay-web` repo have?"
+
+## Permissions required
+
+When you connect GitHub, you will be asked to grant the following access:
+
+| Permission | Why Overlay needs it |
+|---|---|
+| Read repository contents | To read files, commits, and repository metadata |
+| Read issues and pull requests | To list and retrieve issue and PR details |
+| Write issues | To create new issues on your behalf |
+| Read user data | To identify which repos and organizations you have access to |
+
+<Warning>
+  Creating issues and comments through Act mode makes real changes to your repositories. Verify the repository name and content before confirming any write action.
+</Warning>

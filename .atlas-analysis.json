@@ -1,0 +1,121 @@
+{
+  "projectType": "saas",
+  "projectName": "Overlay",
+  "projectDescription": "Overlay is a model-agnostic AI workspace that combines chat, memory, knowledge, media generation, integrations, automations, and voice in one connected web app.",
+  "theme": "almond",
+  "primaryColor": "#97989a",
+  "lightColor": "#d3d4d4",
+  "darkColor": null,
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "pricing"
+            ]
+          },
+          {
+            "group": "Core Features",
+            "pages": [
+              "platform/chat",
+              "platform/ask-and-act",
+              "platform/memory",
+              "platform/knowledge",
+              "platform/notes",
+              "platform/projects"
+            ]
+          },
+          {
+            "group": "Creation & Output",
+            "pages": [
+              "platform/image-generation",
+              "platform/video-generation",
+              "platform/outputs"
+            ]
+          },
+          {
+            "group": "Automation & Actions",
+            "pages": [
+              "platform/integrations",
+              "platform/automations",
+              "platform/browser-automation",
+              "platform/voice"
+            ]
+          },
+          {
+            "group": "Self-Hosting",
+            "pages": [
+              "self-hosting/overview",
+              "self-hosting/configuration",
+              "self-hosting/deployment",
+              "self-hosting/troubleshooting"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Integrations",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "integrations/overview",
+              "integrations/connecting-apps"
+            ]
+          },
+          {
+            "group": "Popular Integrations",
+            "pages": [
+              "integrations/gmail",
+              "integrations/google-calendar",
+              "integrations/notion",
+              "integrations/github",
+              "integrations/slack"
+            ]
+          },
+          {
+            "group": "Advanced",
+            "pages": [
+              "integrations/mcp-servers",
+              "integrations/browser-use",
+              "integrations/code-execution"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Multi-model chat across OpenAI, Anthropic, Google, xAI, Groq, and OpenRouter",
+    "Ask mode (answer synthesis) and Act mode (tool execution)",
+    "Persistent memory that compounds over time",
+    "Searchable knowledge base with file upload and semantic retrieval",
+    "Rich notebook editor with slash commands and project linking",
+    "Project-based organization for chats, notes, and files",
+    "Native image generation with multiple models (GPT Image, FLUX, Seedream)",
+    "Native video generation (Veo, Seedance, Grok Video, Kling, Wan)",
+    "Outputs gallery for persistent storage of generated media",
+    "Voice recording and AI transcription",
+    "100+ external app integrations via Composio",
+    "Browser automation for live web tasks",
+    "Scheduled automations and recurring AI workflows",
+    "MCP server support for external tool connections",
+    "Self-hostable open source codebase"
+  ],
+  "publicApiSurface": [
+    "POST /api/auth/callback — WorkOS OAuth callback",
+    "POST /api/webhooks/stripe — Stripe billing webhooks",
+    "GET /api/subscription — Current user subscription status",
+    "POST /api/checkout — Initiate Stripe checkout session",
+    "GET /api/entitlements — User plan entitlements",
+    "POST /api/topups — Purchase usage credit top-ups",
+    "GET /api/latest-release — Latest app release info",
+    "Convex mutations: createChat, sendMessage, saveMemory, uploadFile, createNote, createProject",
+    "Convex queries: listChats, listMemories, searchKnowledge, listOutputs, listAutomations"
+  ]
+}

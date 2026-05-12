@@ -1,0 +1,122 @@
+---
+title: "Schedule and run recurring AI workflows in Overlay"
+sidebarTitle: "Automations"
+description: "Create scheduled AI workflows that run on your behalf. Describe what you want in plain language, set a schedule, and let Overlay handle the rest automatically."
+---
+
+Automations let you describe a recurring task in plain language, set a schedule, and have Overlay run it for you on repeat — no code, no flow diagrams. Each run executes with full access to your connected integrations, so automations can read email, update spreadsheets, query GitHub, send Slack messages, and more. You define the work once; Overlay does it on schedule.
+
+## What automations can do
+
+An automation is a scheduled AI workflow. You describe the goal in natural language, and Overlay translates it into a sequence of steps with tool calls. Every run produces a full transcript you can review.
+
+<CardGroup cols={3}>
+  <Card title="Monitor and brief" icon="bell">
+    Pull data from connected apps, summarize it, and deliver a digest on a schedule.
+  </Card>
+  <Card title="Enrich and update" icon="database">
+    Fetch data from one source, process it, and write results back to another app.
+  </Card>
+  <Card title="Research and report" icon="search">
+    Browse the web, aggregate findings, and save a structured summary as a note.
+  </Card>
+</CardGroup>
+
+## Create an automation
+
+<Steps>
+  <Step title="Open Automations">
+    Select **Automations** from the left sidebar. You'll see your existing automations and a **New Automation** button.
+  </Step>
+  <Step title="Describe what you want">
+    Click **New Automation** and type what you want the automation to do. Write it the same way you'd explain a task to a colleague — plain language, no special syntax required.
+
+    > "Every Monday at 8am, pull the GitHub PRs merged in the last 7 days, summarize what shipped, and email me a standup brief."
+  </Step>
+  <Step title="Choose a schedule">
+    Select how often the automation should run. See [Schedule types](#schedule-types) below for the available options.
+  </Step>
+  <Step title="Review the generated steps">
+    Overlay generates a step-by-step plan from your description. Review the steps and edit any that need adjusting before you activate.
+  </Step>
+  <Step title="Activate">
+    Click **Activate**. The automation is now live and will run on its next scheduled trigger.
+  </Step>
+</Steps>
+
+## Schedule types
+
+<Tabs>
+  <Tab title="Interval">
+    Run every N minutes or hours. Good for near-real-time monitoring tasks.
+
+    **Example:** Run every 2 hours to check for new support tickets and add them to a tracking sheet.
+  </Tab>
+  <Tab title="Daily">
+    Run once per day at a specified time. Good for morning briefings and end-of-day summaries.
+
+    **Example:** Run every day at 7am to summarize the previous day's emails into action items.
+  </Tab>
+  <Tab title="Weekly">
+    Run once per week on a specified day and time. Good for weekly reports and recurring reviews.
+
+    **Example:** Run every Monday at 8am to generate a standup brief from last week's GitHub activity.
+  </Tab>
+  <Tab title="Monthly">
+    Run once per month on a specified date and time. Good for monthly reporting and periodic cleanups.
+
+    **Example:** Run on the 1st of each month to compile a project progress summary from Notion and Asana.
+  </Tab>
+</Tabs>
+
+## How automations run
+
+When an automation triggers, Overlay executes each step in sequence using Act mode. The run has access to all your connected integrations — the same apps available when you use Act mode in chat. No additional setup is required.
+
+Each run produces:
+
+- A **full transcript** showing every step the AI took and every tool call it made
+- A **status indicator** showing whether the run succeeded, failed, or is in progress
+- **Timestamps** for when the run started and completed
+
+<Info>
+Automations run with access to your connected integrations. If an automation depends on Gmail, for example, make sure Gmail is connected in the [Integrations](/platform/integrations) area before activating.
+</Info>
+
+## View run history
+
+Open any automation from your list to see its run history. Each entry in the history shows the run status, start time, and duration. Click any run to open the full transcript — a step-by-step log of what the AI did, including tool calls, outputs, and any errors.
+
+## Manage automations
+
+### Pause an automation
+
+Click the **Pause** toggle on any active automation to suspend it without deleting it. Paused automations stop running on schedule and can be reactivated at any time.
+
+### Edit an automation
+
+Open an automation and click **Edit** to change the description, steps, or schedule. Edits take effect on the next scheduled run.
+
+### Delete an automation
+
+Open an automation and click **Delete**. This permanently removes the automation and its run history.
+
+<Warning>
+Deleting an automation cannot be undone. If you only want to stop it temporarily, pause it instead.
+</Warning>
+
+## Example automations
+
+These examples illustrate the kinds of tasks automations handle well. Describe something similar in your own words when creating a new automation.
+
+| Automation | Schedule | What it does |
+|---|---|---|
+| **Weekly standup brief** | Every Monday at 8am | Fetches GitHub PRs merged in the last 7 days and emails a summary |
+| **Daily competitor monitoring** | Every day at 7am | Searches the web for news about specified competitors and saves a digest as a note |
+| **Lead enrichment** | Daily | Reads new leads from a Google Sheet, looks up company details online, and writes enriched data back |
+| **Support ticket triage** | Every 2 hours | Scans a shared inbox for new tickets, categorizes them, and adds rows to a tracking spreadsheet |
+| **Monthly project summary** | 1st of each month | Pulls task completion data from Asana and Notion and generates a progress report |
+
+<Tip>
+Start with a simple automation before building complex ones. A daily summary or a weekly briefing is a good first automation — it runs quickly, produces visible output, and helps you understand how the run transcript looks before you rely on it for critical work.
+</Tip>

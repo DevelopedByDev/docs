@@ -1,0 +1,91 @@
+---
+title: "Launch AI-controlled browser sessions from Overlay"
+sidebarTitle: "Browser automation"
+description: "Trigger real browser sessions from Act mode to research live websites, fill forms, and extract structured data from sites with no integration available."
+---
+
+Overlay's browser automation capability launches a real browser controlled by the AI. When you ask for a browser task in Act mode, Overlay opens a live browser session, navigates to the relevant pages, and completes the task on your behalf — all while narrating what it is doing. This is powered by [Browser Use](https://browser-use.com).
+
+This is different from a standard web search. The AI is not looking up cached results — it is interacting with a live, real-time browser session the same way a human would.
+
+## What browser automation can do
+
+<CardGroup cols={2}>
+  <Card title="Live web research" icon="globe">
+    Browse websites for fresh, real-time information that may not appear in the model's training data.
+  </Card>
+  <Card title="Form submission" icon="clipboard">
+    Fill in and submit web forms, sign-up flows, or data entry tasks.
+  </Card>
+  <Card title="Data extraction" icon="download">
+    Pull structured data from websites — tables, lists, product details, pricing.
+  </Card>
+  <Card title="Site interaction" icon="mouse-pointer">
+    Click buttons, navigate menus, log in to services, and perform multi-step sequences.
+  </Card>
+  <Card title="Screenshot capture" icon="camera">
+    Capture what the browser sees at any point during the session.
+  </Card>
+  <Card title="Content summarization" icon="file-text">
+    Visit multiple pages and return a synthesized summary.
+  </Card>
+</CardGroup>
+
+## Prerequisites
+
+Browser Use must be available in your Overlay deployment:
+
+- **Hosted Overlay (getoverlay.io):** Browser Use availability depends on your plan. Check your account settings if you are unsure whether it is enabled.
+- **Self-hosted Overlay:** Browser Use requires a configured Browser Use service in your deployment environment. See your deployment documentation for setup instructions.
+
+<Note>
+  If browser tasks are not working, the feature may not be enabled for your account or deployment. Contact support if you believe it should be available.
+</Note>
+
+## How to trigger a browser task
+
+You do not need to configure anything to use browser automation once it is available. Simply describe what you want in Act mode:
+
+<Steps>
+  <Step title="Switch to Act mode">
+    Open a chat and switch to **Act mode** using the toggle in the chat input bar.
+  </Step>
+  <Step title="Describe the browser task">
+    Type what you want the AI to do. Be specific about the website, the goal, and any details the AI will need (like what to search for or where to navigate).
+  </Step>
+  <Step title="Watch the AI work">
+    Overlay launches a browser session. The AI narrates each step as it navigates, clicks, and reads content. You can follow along in the conversation.
+  </Step>
+  <Step title="Review the result">
+    When the task is complete, the AI returns a summary of what it found or did. Any data it extracted is included in the response.
+  </Step>
+</Steps>
+
+## Example prompts
+
+Use these in Act mode to get started:
+
+- "Go to the pricing page of linear.app and tell me what the Team plan includes."
+- "Search for recent news about AI regulation in the EU and summarize the top three results."
+- "Visit example.com/contact and fill in the contact form with my name and email to request a demo."
+- "Go to my company's status page and tell me if there are any active incidents."
+- "Extract the list of speakers from this conference website: [URL]."
+
+## How the AI narrates its actions
+
+During a browser session, the AI describes each action as it happens:
+
+- "Navigating to the URL..."
+- "Clicking the search button..."
+- "Reading the results page..."
+- "Found the pricing table — extracting the data..."
+
+This narration lets you follow the session in real time and understand exactly what the AI is doing.
+
+<Warning>
+  Browser tasks that involve logging into services or submitting forms can have real-world effects. Review what you are asking the AI to do before confirming actions that submit data, make purchases, or modify accounts.
+</Warning>
+
+<Tip>
+  For best results, give the AI a specific goal and a starting URL. Open-ended tasks like "find the best laptop" work better when you specify a site or a comparison criteria.
+</Tip>

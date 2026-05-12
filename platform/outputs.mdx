@@ -1,0 +1,99 @@
+---
+title: "View and download your generated images and videos"
+sidebarTitle: "Outputs"
+description: "Browse, filter, and download every image and video you've generated in Overlay — all in one persistent gallery with full prompt history and model metadata."
+---
+
+The Outputs gallery is your persistent library of every image and video Overlay has generated for you. Unlike assets buried in a chat thread, your Outputs are saved to a dedicated area where you can browse them, check generation status, view the original prompt and model metadata, and download completed files at any time. Nothing expires and nothing gets lost in your conversation history.
+
+## What Outputs contains
+
+Every time you generate an image or video — whether from chat in Act mode or from the dedicated generation surfaces — Overlay creates an output record. That record captures:
+
+- The **generated file** itself (image or video)
+- The **prompt** you used to create it
+- The **model** that produced it
+- The **status** of the job (pending, processing, completed, or failed)
+- The **date and time** it was created
+- File metadata including size and format
+
+## Browsing and filtering outputs
+
+The Outputs gallery displays your generations in reverse chronological order, with the most recent at the top. You can filter the gallery to find what you need quickly.
+
+<CardGroup cols={2}>
+  <Card title="Filter by type" icon="layers">
+    Show only **images** or only **videos**. Use this when you want to browse a specific kind of asset without mixing the two.
+  </Card>
+  <Card title="Filter by status" icon="clock">
+    Filter by **pending**, **processing**, **completed**, or **failed** to track active jobs or find outputs that need attention.
+  </Card>
+</CardGroup>
+
+## Output status states
+
+Each output moves through a lifecycle from the moment you submit a generation request.
+
+| Status | What it means |
+|---|---|
+| **Pending** | The job has been created and is waiting to start. Your output record exists but the file is not yet available. |
+| **Processing** | The model is actively generating. The job is running — no action is needed. |
+| **Completed** | Generation finished successfully. The file is ready to preview and download. |
+| **Failed** | The generation did not complete. An error message explains what went wrong. You can retry with a new request. |
+
+<Info>
+Video jobs spend more time in the pending and processing states than image jobs. Most image generations complete in seconds; video jobs can take anywhere from thirty seconds to several minutes depending on the model and duration.
+</Info>
+
+## Viewing prompt history and model metadata
+
+Click any output in the gallery to open its detail panel. The detail panel shows you:
+
+- The **full prompt** used to generate the output
+- The **model** that was used
+- The **aspect ratio** and **duration** (for videos)
+- The **creation date and time**
+- The **file size**
+- The current **status** and any error message if the job failed
+
+This makes it easy to recall exactly how you produced a specific result — and to reproduce or iterate on it.
+
+<Tip>
+If you want to generate a variation of an output you like, copy the prompt from the detail panel, paste it into a new generation, and adjust any details you want to change.
+</Tip>
+
+## Downloading completed assets
+
+Once an output reaches **completed** status, you can download it directly from the gallery.
+
+<Steps>
+  <Step title="Open the output">
+    Click the image or video in the gallery to open its detail panel.
+  </Step>
+  <Step title="Click Download">
+    Select the **Download** button. Images download as PNG files and videos download as MP4 files.
+  </Step>
+  <Step title="Use your file">
+    The file is saved to your local device. There is no expiry on downloads — you can return to any completed output and download it again at any time.
+  </Step>
+</Steps>
+
+## Retrying a failed output
+
+If a generation fails, the output record stays in your gallery with a **failed** status and an explanation of the error.
+
+<Steps>
+  <Step title="Open the failed output">
+    Find the failed output in your gallery. You can filter by status "failed" to see all failed jobs at once.
+  </Step>
+  <Step title="Review the error message">
+    Read the error description in the detail panel. Common causes include model unavailability, insufficient budget, or storage limits being reached.
+  </Step>
+  <Step title="Start a new generation">
+    Overlay does not automatically retry failed jobs. Copy the prompt from the failed output and submit a new generation request, optionally choosing a different model or adjusting your settings.
+  </Step>
+</Steps>
+
+<Warning>
+If you see a storage limit error, you've reached your plan's storage allowance. Delete outputs you no longer need or upgrade your plan to free up space before generating new assets.
+</Warning>

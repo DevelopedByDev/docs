@@ -1,0 +1,86 @@
+---
+title: "Use AI to browse, interact, and extract from websites"
+sidebarTitle: "Browser Automation"
+description: "Let Overlay control a real browser to navigate pages, fill forms, extract data, and interact with live websites — all from a single Act mode conversation."
+---
+
+Browser automation gives Overlay the ability to control a real browser session on your behalf. Instead of describing what's on a website, Overlay can visit it directly — navigate pages, click buttons, fill in forms, scroll through results, and extract live information. You describe what you want done in plain language; the AI figures out how to do it in the browser.
+
+## When to use browser automation
+
+Use browser automation when you need the AI to work with live web content that isn't in your knowledge base or available through a connected integration.
+
+<CardGroup cols={2}>
+  <Card title="Fresh information" icon="globe">
+    Browse live pages for current data — prices, news, job listings, or anything that changes frequently.
+  </Card>
+  <Card title="Interact with websites" icon="mouse-pointer">
+    Fill out forms, click through multi-step flows, or interact with web apps that don't have an API.
+  </Card>
+  <Card title="Structured data extraction" icon="table">
+    Scrape tables, lists, and structured content from pages for use in notes, sheets, or further analysis.
+  </Card>
+  <Card title="Web research" icon="search">
+    Conduct multi-page research sessions — search, follow links, compare sources, and synthesize findings.
+  </Card>
+</CardGroup>
+
+## Start a browser task
+
+Browser automation runs inside **Act mode**. To trigger a browser task, switch to Act mode using the toggle in the chat input bar and describe what you want the browser to do.
+
+You don't need any special syntax. Just describe the goal:
+
+> "Go to the Hacker News front page and summarize the top 5 stories."
+
+> "Search for 'product manager jobs in Berlin' on LinkedIn and list the first 10 results."
+
+> "Visit our competitor's pricing page and pull the plan names and prices into a table."
+
+Overlay determines whether a browser session is needed and launches one automatically.
+
+<Info>
+Browser tasks require Act mode. Switch from Ask to Act using the mode toggle before sending your message. Learn more in [Ask and Act modes](/platform/ask-and-act).
+</Info>
+
+## What a browser session looks like
+
+Once Overlay starts a browser task, it narrates each action as it goes. You'll see a live feed of what the AI is doing: which URLs it's visiting, what it's clicking, what it's extracting, and any decisions it makes along the way.
+
+The session narration looks like:
+
+- "Opening the page at example.com…"
+- "Scrolling to find the pricing table…"
+- "Found 3 plan tiers — extracting names and prices…"
+- "Returning results to the conversation."
+
+This narration keeps you informed and makes it easy to spot if the AI has taken a wrong turn, so you can redirect it mid-session if needed.
+
+## Follow-up actions in the same session
+
+Browser sessions stay alive within a conversation. After the AI completes an initial task, you can ask follow-up questions or give additional instructions without starting a new session from scratch.
+
+For example:
+
+1. "List all the blog posts on their site from the last 3 months."
+2. *(after results appear)* "Now open the most-shared post and pull the key points."
+3. *(after that)* "Save all of this as a note titled 'Competitor Content Audit'."
+
+Each follow-up builds on the same open session, so multi-step research or interaction flows work naturally.
+
+## Limitations and safety notes
+
+<Warning>
+Browser automation acts on your behalf in a real browser. Review the AI's plan before it takes actions that are difficult to reverse — submitting forms, clicking confirmation buttons, or interacting with accounts you're logged into.
+</Warning>
+
+Keep these points in mind when using browser automation:
+
+- **The AI acts on your behalf.** Any form submission or click happens in a real browser. If you're logged into an account, the AI can interact with it as you.
+- **Verify before sensitive actions.** For anything involving payments, account changes, or publishing content, confirm the AI's interpretation of your request before it proceeds.
+- **Dynamic pages may behave unexpectedly.** CAPTCHAs, login walls, and heavy JavaScript pages can interrupt a session. If a task gets stuck, restate your goal or try a different approach.
+- **Sessions end with the conversation.** Browser sessions are scoped to a single chat thread. Starting a new conversation starts a fresh session.
+
+<Tip>
+For research tasks, ask Overlay to summarize what it found before taking any further action. This gives you a chance to confirm the AI is on the right track before it continues.
+</Tip>

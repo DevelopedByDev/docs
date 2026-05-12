@@ -1,0 +1,150 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "almond",
+  "name": "Overlay",
+  "description": "Your personal AI operating system. Chat, remember, create, and act — all in one workspace.",
+  "colors": {
+    "primary": "#97989a",
+    "light": "#d3d4d4",
+    "dark": "#97989a"
+  },
+  "favicon": "https://media.brand.dev/f619b5bf-fb82-4ea1-88fd-ac830b144b32.png",
+  "icons": {
+    "library": "lucide"
+  },
+  "styling": {
+    "eyebrows": "breadcrumbs"
+  },
+  "contextual": {
+    "options": ["copy", "view", "assistant", "mcp", "add-mcp"]
+  },
+  "navigation": {
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Home",
+          "icon": "house",
+          "href": "/"
+        },
+        {
+          "anchor": "Get Overlay",
+          "icon": "sparkles",
+          "href": "https://getoverlay.io"
+        }
+      ]
+    },
+    "directory": "card",
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "icon": "rocket",
+            "expanded": true,
+            "pages": [
+              "introduction",
+              "quickstart",
+              "pricing"
+            ]
+          },
+          {
+            "group": "Core Features",
+            "icon": "layers",
+            "expanded": true,
+            "pages": [
+              "platform/chat",
+              "platform/ask-and-act",
+              "platform/memory",
+              "platform/knowledge",
+              "platform/notes",
+              "platform/projects"
+            ]
+          },
+          {
+            "group": "Creation & Output",
+            "icon": "image",
+            "expanded": true,
+            "pages": [
+              "platform/image-generation",
+              "platform/video-generation",
+              "platform/outputs"
+            ]
+          },
+          {
+            "group": "Automation & Actions",
+            "icon": "zap",
+            "expanded": true,
+            "pages": [
+              "platform/integrations",
+              "platform/automations",
+              "platform/browser-automation",
+              "platform/voice"
+            ]
+          },
+          {
+            "group": "Self-Hosting",
+            "icon": "server",
+            "expanded": true,
+            "pages": [
+              "self-hosting/overview",
+              "self-hosting/configuration",
+              "self-hosting/deployment",
+              "self-hosting/troubleshooting"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Integrations",
+        "groups": [
+          {
+            "group": "Overview",
+            "icon": "plug",
+            "expanded": true,
+            "pages": [
+              "integrations/overview",
+              "integrations/connecting-apps"
+            ]
+          },
+          {
+            "group": "Popular Integrations",
+            "icon": "star",
+            "expanded": true,
+            "pages": [
+              "integrations/gmail",
+              "integrations/google-calendar",
+              "integrations/notion",
+              "integrations/github",
+              "integrations/slack"
+            ]
+          },
+          {
+            "group": "Advanced",
+            "icon": "cpu",
+            "expanded": true,
+            "pages": [
+              "integrations/mcp-servers",
+              "integrations/browser-use",
+              "integrations/code-execution"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "navbar": {
+    "links": [],
+    "primary": {
+      "type": "button",
+      "label": "Try Overlay",
+      "href": "https://getoverlay.io"
+    }
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/DevelopedByDev/overlay-web",
+      "x": "https://x.com/getoverlay"
+    }
+  }
+}

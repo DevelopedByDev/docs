@@ -1,0 +1,132 @@
+---
+title: "Chat with AI models from OpenAI, Anthropic, and more"
+sidebarTitle: "Chat"
+description: "Chat with models from OpenAI, Anthropic, Google, xAI, and more — all inside one workspace, with full access to your saved context."
+---
+
+Overlay's chat brings together the best models from every major provider in a single interface. Instead of maintaining separate subscriptions or switching tabs, you pick the right model for each task and start a conversation — with your memories, knowledge, and project files available as context in every thread.
+
+## Selecting a model
+
+Open any chat thread and click the model selector in the toolbar. Models are sorted by intelligence score, so the most capable options appear at the top. Each row shows capability badges for vision and reasoning support, plus a cost tier indicator.
+
+<Tip>
+  On the free tier, free models are automatically hoisted to the top of the list so you can see what is available without upgrading.
+</Tip>
+
+## Available models
+
+The following models are available in Overlay. All models support streaming responses.
+
+<Tabs>
+  <Tab title="OpenAI">
+    | Model | Description | Vision | Reasoning |
+    |---|---|---|---|
+    | GPT-5.4 | Powerful | Yes | Yes |
+    | GPT-5.4 Mini | Compact | Yes | Yes |
+    | GPT-4.1 | Reliable | Yes | Yes |
+  </Tab>
+  <Tab title="Anthropic">
+    | Model | Description | Vision | Reasoning |
+    |---|---|---|---|
+    | Claude Opus 4.7 | Most capable | Yes | Yes |
+    | Claude Sonnet 4.6 | Best balance | Yes | Yes |
+    | Claude Haiku 4.5 | Fast & light | Yes | Yes |
+  </Tab>
+  <Tab title="Google">
+    | Model | Description | Vision | Reasoning |
+    |---|---|---|---|
+    | Gemini 3.1 Pro | Most capable | Yes | Yes |
+    | Gemini 3 Flash | Fast & efficient | Yes | Yes |
+    | Gemma 4 26B | Efficient open model | Yes | Yes |
+  </Tab>
+  <Tab title="xAI">
+    | Model | Description | Vision | Reasoning |
+    |---|---|---|---|
+    | Grok 4.20 | Flagship reasoning | Yes | Yes |
+  </Tab>
+  <Tab title="DeepSeek">
+    | Model | Description | Vision | Reasoning |
+    |---|---|---|---|
+    | DeepSeek V4 Pro | Flagship reasoning | No | Yes |
+    | DeepSeek V4 Flash | Fast reasoning | No | Yes |
+  </Tab>
+  <Tab title="Others">
+    | Model | Provider | Description | Vision | Reasoning |
+    |---|---|---|---|---|
+    | Kimi K2.6 | Moonshot | Multimodal long-context | Yes | Yes |
+    | MiniMax M2.7 | MiniMax | Strong agentic coding | No | Yes |
+    | Qwen 3.6 Plus | Alibaba | Agentic coding | No | Yes |
+    | GLM 5.1 | GLM | Long-horizon coding | No | Yes |
+    | GPT OSS 120B | Groq | Open weights, ultra-fast | No | Yes |
+    | Free Router | OpenRouter | Auto-selects a free model | Yes | Yes |
+    | Free: DeepSeek V3.2 | NVIDIA | Free model | No | Yes |
+    | Free: Kimi K2 Thinking | NVIDIA | Free model | No | Yes |
+  </Tab>
+</Tabs>
+
+<Note>
+  **Vision** models can analyze images you attach to a conversation. **Reasoning** models apply chain-of-thought logic to complex problems. Check the capability badges in the model selector to identify support at a glance.
+</Note>
+
+## Streaming responses
+
+Overlay streams model responses token by token so you see output as it is generated. You do not need to wait for the full response before reading or copying it.
+
+## Attaching files and context
+
+You can attach files directly to a message to give the model additional context for that turn.
+
+<Steps>
+  <Step title="Open the attachment menu">
+    Click the paperclip icon in the chat input bar.
+  </Step>
+  <Step title="Choose your source">
+    Attach a file from your device, reference a file from your Knowledge base, or link a note.
+  </Step>
+  <Step title="Send your message">
+    The attached content is included with your message. Vision-capable models can also read images you attach.
+  </Step>
+</Steps>
+
+Beyond per-message attachments, Overlay automatically draws context from:
+
+<CardGroup cols={2}>
+  <Card title="Memories" icon="brain">
+    Saved facts and preferences that shape how the model responds across all conversations.
+  </Card>
+  <Card title="Knowledge base" icon="database">
+    Uploaded files and folders that the model can retrieve from using semantic search.
+  </Card>
+  <Card title="Project files" icon="folder">
+    When you open a chat inside a project, the model has access to that project's linked files and context.
+  </Card>
+  <Card title="Thread history" icon="messages">
+    All prior messages in the same thread are included so you never need to re-explain context.
+  </Card>
+</CardGroup>
+
+## Thread persistence
+
+Every conversation is saved automatically. You can return to any thread from the sidebar, pick up where you left off, and switch models mid-thread. Switching the model in an existing thread does not erase prior messages — the new model receives the full history.
+
+<Tip>
+  Use projects to keep related threads together. A project-scoped chat gives the model automatic access to the files and notes attached to that project.
+</Tip>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Can I use multiple models in the same conversation?">
+    Yes. You can switch the active model at any point in a thread. The full conversation history carries over to the new model.
+  </Accordion>
+  <Accordion title="Do vision models work with files other than images?">
+    Vision capability refers specifically to image understanding. For documents such as PDFs, upload them to the Knowledge base and the model will retrieve the text content during your conversation.
+  </Accordion>
+  <Accordion title="What is the Free Router?">
+    The Free Router (powered by OpenRouter) automatically selects an available free model for each request. It is the default option on the free tier. Response quality varies depending on which model is selected.
+  </Accordion>
+  <Accordion title="How are model costs calculated?">
+    Each model has a cost tier (free, low, mid, or high) shown in the model selector. Actual token usage is billed against your monthly usage budget set in your account settings.
+  </Accordion>
+</AccordionGroup>

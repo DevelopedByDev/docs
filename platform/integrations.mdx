@@ -1,0 +1,112 @@
+---
+title: "Connect Gmail, Notion, GitHub, and 100+ external apps"
+sidebarTitle: "Integrations"
+description: "Browse, connect, and manage external apps from Overlay's Integrations area. Connected apps become tools in Act mode so the AI can take action on your behalf."
+---
+
+Overlay's Integrations area lets you connect external tools and services so the AI can take real actions on your behalf — reading emails, updating calendars, pushing to GitHub, and more. Once you connect an app, it becomes available automatically when you use Act mode in chat. You don't need to configure anything extra; just connect and start working.
+
+## The Integrations area
+
+Open the **Integrations** section from the left sidebar. You'll see a searchable grid of available apps. Use the search bar at the top to filter by name, or scroll to browse the full catalog. Each tile shows the app name, logo, and your current connection status.
+
+<Note>
+Integrations are powered by Composio, which handles the OAuth flow and secure credential storage on your behalf. You never store raw passwords or API keys inside Overlay.
+</Note>
+
+## Available integrations
+
+The following apps are available to connect. Search the catalog inside Overlay to see the full list of 100+ supported apps.
+
+| Integration | Category | What you can do |
+|---|---|---|
+| **Gmail** | Email | Read, search, draft, send, and label emails |
+| **Google Calendar** | Calendar | View, create, and update events and invites |
+| **Google Sheets** | Productivity | Read and write spreadsheet data |
+| **Google Drive** | Files | Browse, read, and upload files |
+| **Notion** | Knowledge | Read and write pages and databases |
+| **Outlook** | Email | Read and send emails via Microsoft 365 |
+| **Slack** | Messaging | Post messages and read channel history |
+| **GitHub** | Development | Read issues, PRs, and repos; create comments |
+| **Asana** | Project management | Create and update tasks and projects |
+| **LinkedIn** | Networking | Read profile and post activity |
+| **X (Twitter)** | Social | Read timelines and post updates |
+| **100+ more** | Various | Search the catalog inside Overlay |
+
+## Connect an integration
+
+<Steps>
+  <Step title="Open Integrations">
+    Select **Integrations** from the left sidebar. The catalog loads with all available apps.
+  </Step>
+  <Step title="Find the app you want">
+    Type the app name into the search bar, or scroll to find it in the grid.
+  </Step>
+  <Step title="Click Connect">
+    Click the app tile, then click the **Connect** button on the detail panel.
+  </Step>
+  <Step title="Authorize via OAuth">
+    Your browser opens the app's authorization page. Sign in with your account credentials and grant the requested permissions. You're redirected back to Overlay when the connection succeeds.
+  </Step>
+  <Step title="Confirm the connection">
+    The integration tile shows a connected indicator. The app is now available in Act mode.
+  </Step>
+</Steps>
+
+## Use an integration in chat
+
+Switch your chat to **Act** mode using the mode toggle in the chat input bar. In Act mode, Overlay automatically has access to all your connected integrations. You don't need to mention them by name — just describe what you want to do in plain language.
+
+<Tabs>
+  <Tab title="Email example">
+    > "Find any unread emails from my manager this week and summarize them."
+
+    Overlay uses your connected Gmail or Outlook account to retrieve and summarize the relevant messages.
+  </Tab>
+  <Tab title="Calendar example">
+    > "Schedule a 30-minute sync with Alex tomorrow at 2pm and send an invite."
+
+    Overlay creates the event in Google Calendar and sends the calendar invite.
+  </Tab>
+  <Tab title="GitHub example">
+    > "List the open PRs in my main repo and tell me which ones need review."
+
+    Overlay fetches open pull requests from your connected GitHub account and summarizes their status.
+  </Tab>
+</Tabs>
+
+<Info>
+Act mode is required for integrations. In Ask mode, Overlay answers from your saved context only and does not call external apps. Learn more in [Ask and Act modes](/platform/ask-and-act).
+</Info>
+
+## Disconnect an integration
+
+<Steps>
+  <Step title="Open Integrations">
+    Select **Integrations** from the left sidebar.
+  </Step>
+  <Step title="Find the connected app">
+    Locate the integration you want to remove. Connected integrations show a status indicator.
+  </Step>
+  <Step title="Click Disconnect">
+    Open the detail panel for the app and click **Disconnect**. Overlay removes your credentials and the integration is no longer accessible in chat.
+  </Step>
+</Steps>
+
+<Warning>
+Disconnecting an integration revokes Overlay's access to that app. Any automations that rely on the disconnected app will fail on their next run until you reconnect it.
+</Warning>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The OAuth window opened but I was redirected back with an error">
+    Make sure you're signing in with an account that has permission to grant the requested scopes. Some organizations restrict OAuth app approvals — check with your IT administrator if you see a "not approved" message.
+  </Accordion>
+  <Accordion title="My integration shows as connected but Act mode can't reach it">
+    Try disconnecting and reconnecting the integration to refresh your credentials. OAuth tokens occasionally expire or get revoked if you changed your password or revoked app permissions from the external service.
+  </Accordion>
+  <Accordion title="I can't find an app I need">
+    Search by the service name in the catalog. If you still don't see it, the integration may not be available yet. The catalog is expanding regularly — check back or contact support.
+  </Accordion>
+</AccordionGroup>

@@ -1,0 +1,276 @@
+---
+title: "Deploy your self-hosted Overlay instance step by step"
+sidebarTitle: "Deployment"
+description: "Step-by-step guide to deploying Overlay locally and to production on Vercel, covering Convex setup, WorkOS configuration, and AI provider connection."
+---
+
+This guide walks you through a complete Overlay deployment — from cloning the repository to a verified, production-ready instance on Vercel. Follow the steps in order. Each stage builds on the one before it, so skipping ahead without completing the prerequisites will cause errors that are harder to debug later.
+
+<Steps>
+
+<Step title="Clone the repository and install dependencies">
+
+Clone the [overlay-web repository](https://github.com/DevelopedByDev/overlay-web) and install npm packages:
+
+```bash
+git clone https://github.com/DevelopedByDev/overlay-web.git
+cd overlay-web
+npm install
+```
+
+The repository root contains the Next.js app (`src/`), the Convex backend (`convex/`), and environment example files you'll copy in the next step.
+
+</Step>
+
+<Step title="Create your environment file">
+
+Copy the example env file and open it for editing:
+
+```bash
+cp .env.example .env.local
+```
+
+Leave `.env.local` open — you'll be filling it in as you complete the steps below. At minimum, you must set the Convex URLs, WorkOS credentials, session secrets, and at least one AI provider key before the app will run. See the [Configuration reference](/self-hosting/configuration) for a complete list of all variables.
+
+</Step>
+
+<Step title="Create Convex deployments">
+
+Sign up at [convex.dev](https://convex.dev) if you haven't already, then install and authenticate the Convex CLI:
+
+```bash
+npm install convex
+npx convex login
+```
+
+Create your development and production deployments by running these commands once each:
+
+```bash
+npx convex dev --once
+npx convex deploy
+```
+
+After each command completes, note the deployment URLs — you'll need both:
+
+- `https://<prod-slug>.convex.cloud` → `NEXT_PUBLIC_CONVEX_URL`
+- `https://<dev-slug>.convex.cloud` → `DEV_NEXT_PUBLIC_CONVEX_URL`
+- `https://<prod-slug>.convex.site` → `NEXT_PUBLIC_CONVEX_SITE_URL`
+
+Add these three values to your `.env.local` now.
+
+<Warning>
+  Do not pass `.env.local` to `convex deploy`. Your `.env.local` typically sets `CONVEX_DEPLOYMENT` to the dev slug, which causes `deploy` to target the wrong deployment and return a `MissingAccessToken` error. Always run plain `npx convex deploy` or `npm run convex:push:prod` for production pushes.
+</Warning>
+
+</Step>
+
+<Step title="Set Convex environment variables">
+
+Convex environment variables are configured through the CLI, separate from `.env.local`. Run these commands to set all required backend secrets. The inline `$(openssl rand -hex 32)` generates a unique random secret for each:
+
+```bash
+npx convex env set INTERNAL_API_SECRET "$(openssl rand -hex 32)"
+npx convex env set PROVIDER_KEYS_SECRET "$(openssl rand -hex 32)"
+npx convex env set HOOKS_TOKEN_SALT "$(openssl rand -hex 32)"
+npx convex env set WORKOS_API_KEY "sk_..."
+npx convex env set WORKOS_CLIENT_ID "client_..."
+npx convex env set SESSION_TRANSFER_KEY "$(openssl rand -hex 32)"
+npx convex env set SESSION_COOKIE_ENCRYPTION_KEY "$(openssl rand -hex 32)"
+```
+
+Copy the generated values for `SESSION_TRANSFER_KEY` and `SESSION_COOKIE_ENCRYPTION_KEY` into `.env.local` — these must be **identical** in both environments.
+
+Generate the remaining local-only secrets and add them to `.env.local`:
+
+```bash
+export SESSION_SECRET=$(openssl rand -hex 32)
+export SESSION_TRANSFER_KEY=$(openssl rand -hex 32)
+export SESSION_COOKIE_ENCRYPTION_KEY=$(openssl rand -hex 32)
+export INTERNAL_API_SECRET=$(openssl rand -hex 32)
+export INTERNAL_SERVICE_AUTH_SECRET=$(openssl rand -hex 32)
+export PROVIDER_KEYS_SECRET=$(openssl rand -hex 32)
+export HOOKS_TOKEN_SALT=$(openssl rand -hex 32)
+```
+
+Verify that all Convex env vars are set correctly:
+
+```bash
+npx convex env list
+```
+
+</Step>
+
+<Step title="Configure WorkOS redirect URIs">
+
+Sign up at [workos.com](https://workos.com), create an organization, and add your redirect URIs in the WorkOS dashboard:
+
+| Environment | Redirect URI |
+|---|---|
+| Production | `https://your-domain.com/api/auth/callback` |
+| Development | `http://localhost:3000/api/auth/callback` |
+
+After configuring URIs, copy your credentials into `.env.local`:
+
+```env
+WORKOS_CLIENT_ID=client_...
+WORKOS_API_KEY=sk_...
+DEV_WORKOS_CLIENT_ID=client_...
+DEV_WORKOS_API_KEY=sk_...
+```
+
+It is strongly recommended to create separate WorkOS credentials for your dev environment to prevent test logins from affecting production data.
+
+</Step>
+
+<Step title="Set up at least one AI provider">
+
+Overlay requires at least one AI provider key before chat will function.
+
+#### Vercel AI Gateway (recommended)
+
+Vercel AI Gateway gives you a single API key that routes to 20+ providers — OpenAI, Anthropic, Google, xAI, Groq, Cohere, Mistral, Perplexity, and more — with built-in caching, rate limiting, observability, and automatic fallback.
+
+1. Sign up at [vercel.com](https://vercel.com) and create a project.
+2. Enable AI Gateway in your project settings.
+3. Add the API keys for the model providers you want to use.
+4. Copy your Gateway API key (starts with `vgw_`).
+
+```env
+AI_GATEWAY_API_KEY=vgw_...
+```
+
+#### OpenRouter (alternative)
+
+OpenRouter provides access to 200+ models including GPT, Claude, Gemini, Grok, and DeepSeek through a single key.
+
+1. Sign up at [openrouter.ai](https://openrouter.ai).
+2. Generate an API key.
+
+```env
+OPENROUTER_API_KEY=sk-or-...
+```
+
+#### Additional providers
+
+You can supplement either gateway with direct provider keys:
+
+```env
+# Groq — ultra-fast inference on open models
+GROQ_API_KEY=gsk_...
+
+# NVIDIA — free access to DeepSeek V3.2 and Kimi K2 Thinking
+NVIDIA_API_KEY=nvapi-...
+```
+
+<Tip>
+  If you are just getting started, set `AI_GATEWAY_API_KEY` only. You can add other provider keys later without redeploying — they are read at request time.
+</Tip>
+
+</Step>
+
+<Step title="Push the Convex backend">
+
+With your Convex deployments created and env vars set, push the backend schema and functions:
+
+```bash
+# Push to both dev and prod
+npm run convex:push:all
+```
+
+Or push to each environment separately:
+
+```bash
+npm run convex:push:dev   # development backend
+npm run convex:push:prod  # production backend
+```
+
+</Step>
+
+<Step title="Run the development server">
+
+Start the Next.js development server:
+
+```bash
+npm run dev
+```
+
+Open `http://localhost:3000` in your browser. Sign in using WorkOS. If the login flow completes and the workspace loads, your core setup is working correctly.
+
+</Step>
+
+<Step title="Deploy to production on Vercel">
+
+When you're ready to deploy to production, build the app and deploy using the Vercel CLI:
+
+```bash
+npm run build
+```
+
+```bash
+vercel --prod
+```
+
+Set all the variables from your `.env.local` as environment variables in the Vercel project settings (Dashboard → Project → Settings → Environment Variables). At a minimum, set every required variable from the [Configuration reference](/self-hosting/configuration).
+
+After the Vercel deployment completes, push the Convex backend to production:
+
+```bash
+npm run convex:push:prod
+```
+
+If you are using Stripe, update the webhook endpoint in your Stripe dashboard to point to your production domain:
+
+```
+https://your-domain.com/api/webhooks/stripe
+```
+
+</Step>
+
+<Step title="Verify your deployment">
+
+Run through the quick checklist to confirm everything is wired correctly.
+
+**Core checklist:**
+
+- [ ] Convex dev and prod deployments created
+- [ ] Convex env vars set — verify with `npx convex env list`
+- [ ] `.env.local` created with all required variables
+- [ ] WorkOS redirect URIs configured for both environments
+- [ ] At least one AI provider key set
+- [ ] App runs locally: `npm run dev`
+- [ ] Login flow completes without errors
+- [ ] Chat responds to messages
+
+**Optional services checklist:**
+
+- [ ] Stripe products created (`pro_monthly`, `max_monthly`) and webhook configured
+- [ ] Cloudflare R2 bucket created with API token
+- [ ] Composio connected — test an integration from the workspace
+- [ ] Browser Use connected — test a browser automation task
+- [ ] Daytona connected — test code execution in a sandbox
+- [ ] Sentry receiving error events
+- [ ] PostHog receiving page-view events
+
+**Testing commands:**
+
+```bash
+# Verify Convex connection
+npx convex dev
+
+# Check all Convex env vars
+npx convex env list
+
+# Test the production build
+npm run build
+
+# Run the linter
+npm run lint
+```
+
+</Step>
+
+</Steps>
+
+<Note>
+  After backend changes inside `convex/`, always push to both deployments to keep them in sync: `npm run convex:push:all`. Forgetting to push to one environment is a common source of subtle, hard-to-diagnose bugs.
+</Note>

@@ -1,0 +1,115 @@
+---
+title: "Organize chats, notes, and files into focused projects"
+sidebarTitle: "Projects"
+description: "Group chats, notes, files, and project instructions into scoped workspaces so the AI always has exactly the right context for each initiative."
+---
+
+Projects let you organize related work into a single, focused workspace. Instead of letting conversations, notes, and files pile up in one flat list, you group them by initiative — a client account, a product launch, a research track, a writing project. When you work inside a project, the AI automatically draws from that project's linked context, so you do not have to re-explain background every time you start a new conversation.
+
+## Creating a project
+
+<Steps>
+  <Step title="Open the Projects area">
+    Click **Projects** in the left sidebar, or look for the **+ New project** button at the bottom of the sidebar.
+  </Step>
+  <Step title="Name your project">
+    Enter a clear, descriptive name. The name appears in the sidebar and in the project header.
+  </Step>
+  <Step title="Add project instructions (optional)">
+    Write a short paragraph describing the project's goals, audience, constraints, or any standing context the AI should know. These instructions are injected automatically into every conversation inside the project.
+  </Step>
+  <Step title="Create the project">
+    Click **Create**. Your new project appears in the sidebar and opens immediately.
+  </Step>
+</Steps>
+
+## What you can add to a project
+
+<CardGroup cols={2}>
+  <Card title="Chats" icon="messages">
+    Start new conversations from within a project. Each chat is scoped to that project and appears in the project's chat list.
+  </Card>
+  <Card title="Notes" icon="file-pen">
+    Create or move notes into a project. Project notes appear in the project sidebar and are available as context in project chats.
+  </Card>
+  <Card title="Knowledge files" icon="database">
+    Upload files directly to a project or link existing Knowledge base files. The AI retrieves from these files automatically in project conversations.
+  </Card>
+  <Card title="Project instructions" icon="book">
+    Write standing instructions that shape how the AI behaves in every conversation inside this project — tone, goals, constraints, background.
+  </Card>
+</CardGroup>
+
+## Project-scoped context
+
+When you open a chat inside a project, Overlay automatically makes the following available to the AI:
+
+- Project instructions you have written
+- Notes linked to the project
+- Files and knowledge attached to the project
+- Prior chats in the same project (for continuity)
+
+This means you can start a new conversation without re-explaining what the project is, who the audience is, or what decisions have already been made. The AI already knows.
+
+<Info>
+  Project context supplements your global memories and knowledge base — it does not replace them. The AI has access to both your account-wide context and the project-specific context simultaneously.
+</Info>
+
+## Adding chats to a project
+
+<Tabs>
+  <Tab title="Start a new chat inside a project">
+    Open the project and click **+ New chat**. The conversation is automatically scoped to that project.
+  </Tab>
+  <Tab title="Move an existing chat">
+    From the chat list in the sidebar, open the chat options menu (⋯) and select **Move to project**. Choose the destination project.
+  </Tab>
+</Tabs>
+
+## Adding files to a project
+
+<Steps>
+  <Step title="Open the project">
+    Click the project in the sidebar to open its workspace.
+  </Step>
+  <Step title="Go to the project's Files tab">
+    Select the **Files** or **Knowledge** tab within the project view.
+  </Step>
+  <Step title="Upload or link files">
+    Upload new files directly, or select existing files from your Knowledge base to associate with this project.
+  </Step>
+</Steps>
+
+## Navigating between projects
+
+All your projects appear in the left sidebar. Click a project name to switch to it. The main content area updates to show that project's chats, notes, and files.
+
+<Tip>
+  Pin your most active projects to the top of the sidebar for faster access. Use the project options menu (⋯) to pin or reorder.
+</Tip>
+
+## Nested projects
+
+Projects support a parent–child structure so you can organize large initiatives into sub-projects. For example, a top-level "Client: Acme" project could contain sub-projects for "Website Redesign," "Q3 Campaign," and "Onboarding."
+
+To create a sub-project, open the parent project and click **+ New sub-project**, or assign a parent when creating a new project.
+
+## Best practices
+
+<AccordionGroup>
+  <Accordion title="How granular should a project be?">
+    Create a project for any initiative that spans multiple conversations or requires consistent context. One-off questions belong in a regular chat. An ongoing client engagement, product build, or research effort benefits from its own project.
+  </Accordion>
+  <Accordion title="What should go in project instructions?">
+    Write the things you would normally say at the start of every conversation: the project's purpose, the audience, your role, any constraints, and recurring terminology. Treat it like a one-time briefing for the AI.
+  </Accordion>
+  <Accordion title="How many files should I add to a project?">
+    Add files that are directly relevant to this project's work. A focused, curated set of project files produces better retrieval than attaching everything you have ever uploaded. Keep your broader document library in the global Knowledge base.
+  </Accordion>
+  <Accordion title="What happens to a project's chats and notes if I delete the project?">
+    Deleting a project permanently removes the project and soft-deletes all chats and notes that belonged to it. Files you uploaded to the project are also removed from project scope. Review and export anything you want to keep before deleting.
+  </Accordion>
+  <Accordion title="Can I collaborate on a project with others?">
+    Projects are currently personal workspaces scoped to your account. Team collaboration features may be available on specific plans — check your account settings for sharing options.
+  </Accordion>
+</AccordionGroup>

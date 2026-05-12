@@ -1,0 +1,80 @@
+---
+title: "Post to Slack channels and DMs via Overlay Act mode"
+sidebarTitle: "Slack"
+description: "Connect Slack to post to channels, send direct messages, read recent activity, and search conversations — all from Act mode in Overlay without switching apps."
+---
+
+The Slack integration lets Overlay's AI interact with your Slack workspace. From Act mode, you can send messages to channels, read recent messages, and search across conversations — without switching tabs.
+
+## What you can do
+
+<CardGroup cols={2}>
+  <Card title="Send messages to channels" icon="send">
+    Post to any channel your Slack account has access to.
+  </Card>
+  <Card title="Send direct messages" icon="message-circle">
+    Send a DM to any member of your workspace.
+  </Card>
+  <Card title="Read recent messages" icon="book-open">
+    Retrieve the latest messages from a channel or conversation.
+  </Card>
+  <Card title="Search messages" icon="search">
+    Search across your workspace by keyword, channel, or user.
+  </Card>
+  <Card title="Summarize conversations" icon="layers">
+    Ask for a plain-language summary of recent channel activity.
+  </Card>
+  <Card title="Draft message content" icon="edit">
+    Have the AI write the message, then send it from chat.
+  </Card>
+</CardGroup>
+
+## How to connect Slack
+
+<Steps>
+  <Step title="Open Integrations">
+    Click **Integrations** in the left sidebar.
+  </Step>
+  <Step title="Find Slack">
+    Locate **Slack** in the Available list or search for it.
+  </Step>
+  <Step title="Click Connect">
+    Click **Connect**. A new tab opens with Slack's OAuth screen.
+  </Step>
+  <Step title="Choose your workspace and authorize">
+    Select the Slack workspace you want to connect. Review the requested permissions and click **Allow**.
+  </Step>
+  <Step title="Start using it">
+    Switch to Act mode in any chat to send messages or read Slack activity.
+  </Step>
+</Steps>
+
+<Note>
+  You can only connect one Slack workspace per Overlay account. If you need to work with multiple workspaces, you will need to disconnect and reconnect to switch.
+</Note>
+
+## Example prompts
+
+Use these in Act mode to get started:
+
+- "Post a standup update to #team-updates: shipped the new auth flow, working on the dashboard today, no blockers."
+- "Summarize the last 20 messages in #engineering."
+- "Send a DM to @sarah asking if she reviewed the proposal."
+- "Search Slack for any messages mentioning 'deployment issue' from this week."
+- "What has been discussed in #general today?"
+- "Post a message to #releases announcing that version 2.1 is now live."
+
+## Permissions required
+
+When you connect Slack, you will be asked to grant the following access:
+
+| Permission | Why Overlay needs it |
+|---|---|
+| Send messages | To post to channels and DMs on your behalf |
+| Read messages | To retrieve recent messages and channel history |
+| Search messages | To find content across the workspace |
+| Read workspace info | To identify channels and users when you reference them by name |
+
+<Warning>
+  Messages sent through Act mode are posted immediately and appear in your Slack workspace as coming from you. Review the content carefully before asking the AI to send.
+</Warning>

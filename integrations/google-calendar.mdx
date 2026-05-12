@@ -1,0 +1,80 @@
+---
+title: "Schedule and manage Google Calendar events from chat"
+sidebarTitle: "Google Calendar"
+description: "Connect Google Calendar to view events, schedule meetings, check availability, and make updates from Act mode — without switching to a separate calendar app."
+---
+
+The Google Calendar integration lets Overlay's AI read and write your calendar. You can check your upcoming schedule, create events, update existing ones, and ask about your availability — all from a conversation in Act mode.
+
+## What you can do
+
+<CardGroup cols={2}>
+  <Card title="View upcoming events" icon="calendar">
+    See what's on your schedule for today, this week, or any date range.
+  </Card>
+  <Card title="Create events" icon="plus-circle">
+    Schedule meetings, set reminders, and add events with full details.
+  </Card>
+  <Card title="Update events" icon="edit">
+    Change the time, title, description, or attendees of existing events.
+  </Card>
+  <Card title="Delete events" icon="trash-2">
+    Remove events from your calendar when plans change.
+  </Card>
+  <Card title="Check availability" icon="clock">
+    Ask whether you are free at a specific time or on a given day.
+  </Card>
+  <Card title="Find scheduling gaps" icon="grid">
+    Let the AI identify open slots across your calendar for a given duration.
+  </Card>
+</CardGroup>
+
+## How to connect Google Calendar
+
+<Steps>
+  <Step title="Open Integrations">
+    Click **Integrations** in the left sidebar.
+  </Step>
+  <Step title="Find Google Calendar">
+    Locate **Google Calendar** in the Available list or search for it.
+  </Step>
+  <Step title="Click Connect">
+    Click **Connect**. A new tab opens with Google's OAuth screen.
+  </Step>
+  <Step title="Sign in and authorize">
+    Sign in to the Google account whose calendar you want to connect. Review the permissions and click **Allow**.
+  </Step>
+  <Step title="Start using it">
+    Once authorized, switch to Act mode in any chat to query or manage your calendar.
+  </Step>
+</Steps>
+
+## Example prompts
+
+Use these in Act mode to get started:
+
+- "What's on my calendar this week?"
+- "Am I free tomorrow afternoon?"
+- "Schedule a meeting with John on Friday at 2 PM — call it 'Project sync' and make it 30 minutes."
+- "Move my 10 AM meeting on Thursday to 11 AM."
+- "Find a free 1-hour slot for me this week."
+- "Delete the event called 'Team lunch' on Wednesday."
+- "Show me all events I have with Sarah next month."
+
+## Permissions required
+
+When you connect Google Calendar, Google will ask you to grant the following access:
+
+| Permission | Why Overlay needs it |
+|---|---|
+| Read calendar events | To show your schedule and check availability |
+| Create and edit events | To schedule and update events on your behalf |
+| Delete events | To remove events when you ask |
+
+<Note>
+  Overlay connects to the primary calendar on the Google account you authorize. Events from other calendars shared with your account may also be visible depending on your Google Calendar settings.
+</Note>
+
+<Warning>
+  Deleting or modifying events through Act mode makes changes to your real calendar immediately. Double-check details before confirming any action that creates, updates, or removes an event.
+</Warning>

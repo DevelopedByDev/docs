@@ -1,0 +1,79 @@
+---
+title: "Read and update Notion pages from Overlay's Act mode"
+sidebarTitle: "Notion"
+description: "Connect Notion to read pages, create new content, update database entries, and search your Notion workspace — all from Act mode without leaving Overlay."
+---
+
+The Notion integration gives Overlay's AI access to your Notion workspace. Once connected, you can ask the AI to read existing pages, create new ones, update content, search your workspace, and interact with databases — all from Act mode in chat.
+
+## What you can do
+
+<CardGroup cols={2}>
+  <Card title="Read pages" icon="book-open">
+    Retrieve the full content of any page in your workspace.
+  </Card>
+  <Card title="Create pages" icon="file-plus">
+    Ask the AI to write and create new pages in any workspace section.
+  </Card>
+  <Card title="Update pages" icon="edit-3">
+    Add content to or modify existing pages and database entries.
+  </Card>
+  <Card title="Search workspace" icon="search">
+    Find pages, databases, and content by keyword across your entire workspace.
+  </Card>
+  <Card title="Manage databases" icon="database">
+    Read and write database rows, filter entries, and add new records.
+  </Card>
+  <Card title="Organize content" icon="folder">
+    Move pages and create sub-pages within your workspace hierarchy.
+  </Card>
+</CardGroup>
+
+## How to connect Notion
+
+<Steps>
+  <Step title="Open Integrations">
+    Click **Integrations** in the left sidebar.
+  </Step>
+  <Step title="Find Notion">
+    Locate **Notion** in the Available list or search for it.
+  </Step>
+  <Step title="Click Connect">
+    Click **Connect**. A new tab opens with Notion's OAuth screen.
+  </Step>
+  <Step title="Select your workspace and authorize">
+    Choose which Notion workspace to connect. You can also select which pages Overlay is allowed to access. Click **Allow access** to confirm.
+  </Step>
+  <Step title="Start using it">
+    Once authorized, switch to Act mode in any chat to read, create, or update Notion content.
+  </Step>
+</Steps>
+
+<Note>
+  During the Notion OAuth flow, you choose which pages or databases Overlay can access. If you want the AI to work with a specific page later and it cannot find it, check that the page was included in your authorization selection.
+</Note>
+
+## Example prompts
+
+Use these in Act mode to get started:
+
+- "Search my Notion workspace for the product roadmap."
+- "Create a Notion page called 'Meeting notes — May 12' and write up the decisions we just discussed."
+- "Show me what's in the page called 'Q2 Goals'."
+- "Add a new row to my Content Calendar database for a blog post titled 'AI productivity guide' with status 'Draft'."
+- "Update the 'Project brief' page to include the new timeline we agreed on."
+- "List all pages in my workspace that mention 'onboarding'."
+
+## Permissions required
+
+When you connect Notion, you will be asked to grant the following access:
+
+| Permission | Why Overlay needs it |
+|---|---|
+| Read content | To retrieve pages, databases, and search results |
+| Create and edit content | To write new pages and update existing ones |
+| Access selected pages | Notion lets you choose which pages to grant access to |
+
+<Warning>
+  Overlay can only access pages and databases you explicitly grant access to during the OAuth flow. If you need to expand access later, disconnect and reconnect to go through the authorization flow again and select additional pages.
+</Warning>

@@ -1,0 +1,114 @@
+---
+title: "Execute code in Daytona sandboxes from Overlay chat"
+sidebarTitle: "Code execution"
+description: "Run code and CLI commands in isolated, persistent Daytona sandboxes from Act mode — supporting any language that runs in a Linux shell."
+---
+
+Overlay can write and execute code on your behalf inside isolated, persistent sandboxes powered by [Daytona](https://daytona.io). When you ask the AI to run code in Act mode, it generates the code, executes it in a secure sandbox environment, and returns the results directly to your conversation.
+
+You do not need to install anything locally. The sandbox is a full Linux environment — any language or tool that can run in a shell is supported.
+
+## What code execution can do
+
+<CardGroup cols={2}>
+  <Card title="Data processing" icon="bar-chart-2">
+    Parse CSV files, transform JSON, query datasets, and produce summaries or charts.
+  </Card>
+  <Card title="File manipulation" icon="folder">
+    Read, write, rename, or convert files in the sandbox environment.
+  </Card>
+  <Card title="Script execution" icon="terminal">
+    Run shell scripts, Python scripts, Node.js programs, or any other executable.
+  </Card>
+  <Card title="Dependency installation" icon="package">
+    Install packages at runtime (e.g. `pip install`, `npm install`) and use them immediately.
+  </Card>
+  <Card title="API calls" icon="zap">
+    Make HTTP requests to external APIs and process the response.
+  </Card>
+  <Card title="Testing and validation" icon="check-circle">
+    Run tests, validate data, or verify the output of a script before using it elsewhere.
+  </Card>
+</CardGroup>
+
+## Supported languages
+
+Any language or runtime that can be installed in a Linux shell is supported. Common examples include:
+
+<Tabs>
+  <Tab title="Common languages">
+    - Python
+    - JavaScript / Node.js
+    - TypeScript
+    - Ruby
+    - Go
+    - Rust
+    - Java
+    - PHP
+    - Bash / shell scripting
+  </Tab>
+  <Tab title="Data & science tools">
+    - pandas, NumPy, matplotlib (Python)
+    - R
+    - Julia
+    - SQL (via SQLite or installed databases)
+  </Tab>
+  <Tab title="CLI tools">
+    - `curl`, `wget` for HTTP requests
+    - `jq` for JSON processing
+    - `ffmpeg` for media manipulation
+    - `git` for version control tasks
+    - Any tool installable via `apt`, `pip`, or `npm`
+  </Tab>
+</Tabs>
+
+## How to trigger code execution
+
+You do not need to configure anything. Code execution is available automatically in Act mode.
+
+<Steps>
+  <Step title="Switch to Act mode">
+    Open a chat and enable **Act mode** using the toggle in the chat input bar.
+  </Step>
+  <Step title="Describe what you want">
+    Tell the AI what you need. You can describe the task in plain language — you do not need to write the code yourself.
+  </Step>
+  <Step title="The AI writes and runs the code">
+    Overlay generates the code, executes it in a Daytona sandbox, and streams the output back to your conversation.
+  </Step>
+  <Step title="Review the results">
+    The output — printed results, file contents, error messages, or generated files — appears directly in the chat.
+  </Step>
+</Steps>
+
+## Example prompts
+
+Use these in Act mode to get started:
+
+- "Write a Python script that reads this CSV data and returns the top 10 rows sorted by revenue."
+- "Calculate the compound interest on $5,000 at 7% over 20 years."
+- "Convert this JSON response into a formatted table."
+- "Write a shell script that checks whether a URL returns a 200 status code."
+- "Install pandas and matplotlib, then plot a bar chart of these numbers: [data]."
+- "Parse this log file and count how many lines contain the word 'ERROR'."
+- "Write and run a Node.js script that makes a GET request to `https://api.example.com/data` and prints the response."
+
+## About the sandbox environment
+
+<Info>
+  Each code execution session runs in an isolated Daytona sandbox — a persistent Linux environment scoped to your workspace. The sandbox persists across messages within a session, so variables, installed packages, and files from earlier in the conversation remain available for follow-up tasks.
+</Info>
+
+Sandboxes are:
+
+- **Isolated** — your code runs in a container separate from other users and from Overlay's own infrastructure
+- **Persistent within a session** — state carries forward within a conversation
+- **Ephemeral across sessions** — sandboxes are cleaned up after the session ends; do not rely on them for long-term file storage
+
+<Warning>
+  Do not execute code that handles sensitive credentials, private keys, or personal data you would not want passed to an AI model. The AI sees your code and its output as part of the conversation context.
+</Warning>
+
+<Tip>
+  If the AI produces code with an error, just say "fix the error and try again" — it will read the error output, adjust the code, and re-run it.
+</Tip>

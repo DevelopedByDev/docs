@@ -1,0 +1,178 @@
+---
+title: "Create AI video from text prompts or reference images"
+sidebarTitle: "Video Generation"
+description: "Generate videos from text prompts, static images, character references, or existing footage using multiple AI video models including Veo, Kling, and Wan."
+---
+
+Overlay brings AI video generation directly into your workspace. You can generate video from a text prompt, animate a static image, place characters into new scenes using reference images, transfer motion from one clip to another, or transform an existing video with a text instruction. Every job runs asynchronously — you can keep working while your video renders, and Overlay notifies you when it's ready.
+
+## Available video models
+
+Different models support different generation modes. The table below lists each model alongside the modes it supports.
+
+| Model | Provider | Supported modes | Notes |
+|---|---|---|---|
+| **Veo 3.1** | Google | Text-to-video, Image-to-video | Highest quality; 4, 6, or 8 second clips |
+| **Veo 3.1 Fast** | Google | Text-to-video, Image-to-video | Faster variant of Veo 3.1 |
+| **Seedance v1.5 Pro** | ByteDance | Text-to-video, Image-to-video | Cinematic quality; 4–12 seconds |
+| **Grok Video** | xAI | Text-to-video, Image-to-video, Video editing | Creative and fast; supports editing existing videos |
+| **Wan v2.6** | Alibaba | Text-to-video | Versatile general-purpose generation |
+| **Wan v2.6 I2V** | Alibaba | Image-to-video | Smooth image animation |
+| **Wan v2.6 R2V** | Alibaba | Reference-to-video | Place characters into new scenes |
+| **Kling v2.6** | Kling AI | Text-to-video | Cinematic motion quality |
+| **Kling v2.6 I2V** | Kling AI | Image-to-video | Animate static images |
+| **Kling Motion Control** | Kling AI | Motion control | Transfer motion from a reference video |
+
+## Generation modes
+
+### Text-to-video
+
+Generate a video clip from a written description. This is the default mode when you don't supply a reference image or video.
+
+<Steps>
+  <Step title="Open the video generation surface">
+    Navigate to the video generation panel from your workspace sidebar, or trigger it from chat in Act mode by describing a video you want to create.
+  </Step>
+  <Step title="Write your prompt">
+    Describe the scene, subject, motion, and style. For example:
+
+    > "A slow-motion shot of a red maple leaf falling into a still forest pond, cinematic, golden hour light"
+  </Step>
+  <Step title="Select a model, duration, and aspect ratio">
+    Choose from the text-to-video models above. Set your preferred duration and aspect ratio using the controls in the panel.
+  </Step>
+  <Step title="Start the job">
+    Click **Generate**. Overlay creates a pending output record immediately and begins rendering in the background. You can navigate away — the job continues and your result appears in Outputs when it's ready.
+  </Step>
+</Steps>
+
+### Image-to-video
+
+Animate a static image into a video clip. Overlay sends your image and a motion prompt to the selected model, which generates natural movement from the scene.
+
+<Steps>
+  <Step title="Provide a reference image">
+    Upload an image or select one from your Outputs gallery. You can use any image — a photo, an AI-generated image, or an illustration.
+  </Step>
+  <Step title="Write a motion prompt">
+    Describe how you want the image to move. For example:
+
+    > "Camera slowly zooms in, gentle ripples appear on the water surface"
+  </Step>
+  <Step title="Select an I2V-compatible model">
+    Choose a model that supports image-to-video: Veo 3.1, Veo 3.1 Fast, Seedance v1.5 Pro, Grok Video, Wan v2.6 I2V, or Kling v2.6 I2V.
+  </Step>
+  <Step title="Generate and wait">
+    Submit the job. The resulting video is saved to your Outputs gallery when complete.
+  </Step>
+</Steps>
+
+<Tip>
+You can animate images you generated with Overlay's image generation tools. Open any image in your Outputs gallery and select the option to animate it — this pre-loads it as the reference image for a new video job.
+</Tip>
+
+### Reference-to-video (R2V)
+
+Reference-to-video lets you place a specific character or subject — taken from a reference image — into an entirely new video scene. Use this when you want consistent character identity across clips.
+
+<Steps>
+  <Step title="Provide your reference image">
+    Upload the image containing the character or subject you want to place into the video. Clear, well-lit images of the subject produce the best results.
+  </Step>
+  <Step title="Write a scene prompt">
+    Describe the new scene and the action the character should take. Be specific about setting, environment, and movement.
+  </Step>
+  <Step title="Select Wan v2.6 R2V">
+    Reference-to-video is currently supported by **Wan v2.6 R2V**. Select it from the model picker.
+  </Step>
+  <Step title="Generate">
+    Submit the job. Overlay places the character from your reference image into the generated scene.
+  </Step>
+</Steps>
+
+### Motion control
+
+Motion control transfers the movement pattern from a reference video onto a new character or subject. The resulting clip follows the same motion trajectory but with your chosen subject instead of the original.
+
+<Steps>
+  <Step title="Provide a character image">
+    Upload the image of the character or subject you want to animate.
+  </Step>
+  <Step title="Provide a reference video">
+    Upload the video whose motion you want to transfer. Clear, single-subject videos with defined movement work best.
+  </Step>
+  <Step title="Select Kling Motion Control">
+    Motion control is currently supported by **Kling Motion Control**. Select it from the model picker.
+  </Step>
+  <Step title="Generate">
+    Submit the job. The output video applies the reference motion to your character.
+  </Step>
+</Steps>
+
+### Video editing
+
+Transform an existing video using a text instruction. Rather than generating from scratch, Overlay sends your video and your edit prompt to the model, which modifies the visual content accordingly.
+
+<Steps>
+  <Step title="Upload your source video">
+    Provide the video you want to edit. This can be a video from your Outputs gallery or an uploaded file.
+  </Step>
+  <Step title="Write your edit instruction">
+    Describe the transformation you want to apply. For example:
+
+    > "Make the scene appear to take place at sunset with warm orange tones"
+  </Step>
+  <Step title="Select Grok Video">
+    Video editing is currently supported by **Grok Video**. Select it from the model picker.
+  </Step>
+  <Step title="Generate">
+    Submit the job and wait for the edited video to appear in your Outputs gallery.
+  </Step>
+</Steps>
+
+## Duration options
+
+Available durations depend on the model you select.
+
+| Model | Duration options |
+|---|---|
+| Veo 3.1, Veo 3.1 Fast | 4, 6, or 8 seconds |
+| Seedance v1.5 Pro | 4–12 seconds |
+| Kling v2.6, Kling v2.6 I2V, Kling Motion Control | 5 seconds (default) |
+| Wan v2.6, Wan v2.6 I2V, Wan v2.6 R2V | Up to 8 seconds |
+| Grok Video | 8 seconds (default) |
+
+## Aspect ratio options
+
+| Aspect ratio | Common use cases |
+|---|---|
+| **16:9** | YouTube, presentations, widescreen content |
+| **9:16** | Instagram Reels, TikTok, Shorts |
+| **1:1** | Social feeds, square format |
+| **4:3** | Classic video, general content |
+
+## Asynchronous job handling
+
+Video generation takes longer than image generation — most jobs complete in anywhere from thirty seconds to several minutes depending on the model, duration, and current demand. Overlay handles this asynchronously so you don't have to wait.
+
+When you submit a video job:
+
+1. Overlay creates a **pending** output record immediately and returns a job ID.
+2. The generation runs in the background. You can navigate to other parts of your workspace.
+3. The output status updates automatically to **processing** while the model is rendering.
+4. When the video is ready, the status changes to **completed** and the file becomes available to preview and download.
+5. If a job fails, the status changes to **failed** and an error message is shown so you can retry.
+
+<Info>
+You can check the status of all your video jobs at any time in the **Outputs** gallery. Filter by type "video" and status "pending" or "processing" to see what's currently in progress.
+</Info>
+
+## Where your videos are saved
+
+Every completed video is saved automatically to your **Outputs** gallery. Results persist across sessions, so you can revisit, download, or use them as the basis for further video editing or motion control jobs.
+
+See [Outputs](/platform/outputs) for details on browsing, filtering, and downloading your generated assets.
+
+<Warning>
+Video generation requires a paid Overlay plan. Budget is reserved at the start of each job and adjusted to the actual cost when the video completes. If you don't have enough remaining budget, Overlay will prompt you to top up before starting.
+</Warning>

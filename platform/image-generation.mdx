@@ -1,0 +1,139 @@
+---
+title: "Generate and edit AI images without leaving Overlay"
+sidebarTitle: "Image Generation"
+description: "Generate, edit, and iterate on images using GPT Image, FLUX, Seedream, and more — with aspect ratio control and automatic saving to your Outputs gallery."
+---
+
+Overlay includes native image generation directly inside your workspace. You can prompt an image from chat, choose your model and aspect ratio, and then edit or build on that image in follow-up turns — all without switching tools. Every image you generate is saved automatically to your Outputs gallery.
+
+## Available image models
+
+Choose the model that best fits your quality needs and speed preference. All models support aspect ratio selection and image editing.
+
+| Model | Provider | Best for |
+|---|---|---|
+| **GPT Image 1.5** | OpenAI | High-quality, detailed generations with strong prompt adherence |
+| **Grok Image Pro** | xAI | Photorealistic outputs and lifelike subjects |
+| **Grok Image** | xAI | Fast, creative generations with a distinctive style |
+| **FLUX 2 Max** | Black Forest Labs | Premium quality and fine compositional control |
+| **FLUX Schnell** | Prodia | Ultra-fast, low-cost generations for rapid iteration |
+| **Seedream 5.0 Lite** | ByteDance | Speedy generation with clean aesthetic results |
+| **Seedream 4.5** | ByteDance | Balanced quality and generation speed |
+
+<Tip>
+If you're unsure which model to pick, start with **GPT Image 1.5** for detailed work or **FLUX Schnell** when you want to iterate quickly on ideas before committing to a higher-quality run.
+</Tip>
+
+## Generating an image
+
+<Tabs>
+  <Tab title="From chat (Act mode)">
+    <Steps>
+      <Step title="Open a chat and switch to Act mode">
+        Open any chat thread. Click the **Act** toggle in the chat toolbar to enable tool use — image generation is a tool that runs in Act mode.
+      </Step>
+      <Step title="Describe the image you want">
+        Type your prompt in the message box and send it. For example:
+
+        > "Generate an image of a sunlit mountain lake at dawn, photorealistic, wide angle"
+
+        Overlay automatically routes your request to the image generation tool.
+      </Step>
+      <Step title="Choose your model (optional)">
+        Before sending, you can specify a model in your prompt or use the generation controls that appear in the chat interface to select a model and aspect ratio.
+      </Step>
+      <Step title="Review and iterate">
+        Your image appears inline in the chat. You can send a follow-up message to refine, edit, or generate a new variation.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="From the dedicated image surface">
+    <Steps>
+      <Step title="Open the image generation panel">
+        Navigate to the image generation surface from the left sidebar or via the creation controls inside your workspace.
+      </Step>
+      <Step title="Enter your prompt">
+        Type a description of the image you want to create in the prompt field.
+      </Step>
+      <Step title="Select a model and aspect ratio">
+        Use the model picker to choose from the available image models. Then select your preferred aspect ratio from the options below.
+      </Step>
+      <Step title="Generate">
+        Click **Generate**. Your image is created and saved to your Outputs gallery automatically.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Aspect ratio options
+
+Overlay supports the following aspect ratios for image generation. Choose based on where you plan to use the image.
+
+| Aspect ratio | Common use cases |
+|---|---|
+| **1:1** | Social media posts, profile images, thumbnails |
+| **16:9** | Presentations, YouTube thumbnails, desktop wallpapers |
+| **9:16** | Mobile wallpapers, Instagram Stories, TikTok |
+| **4:3** | General photography, blog images |
+| **3:4** | Portrait photography, Pinterest |
+
+## Editing an existing image
+
+You can use any previously generated image as the starting point for a new generation. This lets you refine details, change elements, or apply a new style while preserving the composition you like.
+
+<Steps>
+  <Step title="Open an existing output">
+    Go to your **Outputs** gallery and select the image you want to edit. You can also use an image that was just generated in chat.
+  </Step>
+  <Step title="Start a follow-up generation">
+    In the chat or generation surface, attach the existing image and write a new prompt describing the change you want. For example:
+
+    > "Change the sky to a stormy, dramatic scene"
+  </Step>
+  <Step title="Review the result">
+    Overlay sends both the reference image and your prompt to the selected model. The new image is saved as a separate output alongside the original.
+  </Step>
+</Steps>
+
+<Note>
+Not all models handle image editing equally. **GPT Image 1.5** and **Grok Image Pro** tend to produce the most faithful edits when a reference image is provided.
+</Note>
+
+## Image-to-video
+
+Once you have a generated image you like, you can animate it into a short video clip. Select the image in your Outputs gallery and choose the **Animate** or image-to-video option to open it in the video generation flow.
+
+See [Video Generation](/platform/video-generation) for full details on available models, durations, and options.
+
+## Where your images are saved
+
+Every image you generate — whether from chat or the dedicated surface — is automatically saved to your **Outputs** gallery. Outputs persist across sessions, so you can revisit, download, or build on any image you've created.
+
+See [Outputs](/platform/outputs) for details on browsing, filtering, and downloading your generated assets.
+
+## Tips for better image prompts
+
+<CardGroup cols={2}>
+  <Card title="Be specific about subject and setting" icon="crosshair">
+    Describe what's in the image, where it is, and any important details about lighting, time of day, or environment. Vague prompts produce generic results.
+  </Card>
+  <Card title="Specify a style or medium" icon="palette">
+    Add terms like "oil painting," "photorealistic," "watercolor," "3D render," or "cinematic photography" to steer the aesthetic in a clear direction.
+  </Card>
+  <Card title="Describe the composition" icon="layout">
+    Mention framing like "wide angle," "close-up," "bird's eye view," or "portrait" to control how the subject sits in the frame.
+  </Card>
+  <Card title="Include quality modifiers" icon="star">
+    Phrases like "highly detailed," "sharp focus," "professional photography," or "award-winning" can improve output quality on most models.
+  </Card>
+  <Card title="Keep prompts concise" icon="align-left">
+    Aim for one to three focused sentences. Overly long prompts with conflicting instructions often confuse models and reduce coherence.
+  </Card>
+  <Card title="Iterate from a base" icon="refresh-cw">
+    Generate a rough version first, then use image editing to refine specific elements. This is faster than trying to nail everything in a single prompt.
+  </Card>
+</CardGroup>
+
+<Warning>
+Image generation requires a paid Overlay plan. If you see a prompt asking you to upgrade, visit your account settings to choose a plan that fits your usage.
+</Warning>

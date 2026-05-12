@@ -1,0 +1,70 @@
+---
+title: "Overlay integrations: connect apps to act from chat"
+sidebarTitle: "Overview"
+description: "Connect Overlay to Gmail, Notion, GitHub, Slack, and 100+ external apps. Connected apps become tools you can use directly from Act mode in chat."
+---
+
+Overlay connects to over 100 external applications through [Composio](https://composio.dev), a managed integration layer that handles authentication and API access on your behalf. Once you connect an app, it becomes available as a tool in **Act mode** — meaning you can instruct the AI to read, write, or take action in that app directly from a conversation.
+
+Integrations turn Overlay from a place to think into a place to act. Instead of drafting an email in Overlay and then switching to Gmail to send it, you can ask Overlay to send it. Instead of looking up your calendar in a separate tab, you can ask what is on your schedule this week.
+
+## App categories
+
+<CardGroup cols={2}>
+  <Card title="Productivity" icon="briefcase">
+    Gmail, Google Calendar, Google Sheets, Google Drive, Notion
+  </Card>
+  <Card title="Code & Dev" icon="code">
+    GitHub — list PRs, read issues, search repositories, and more
+  </Card>
+  <Card title="Communication" icon="message-circle">
+    Slack, Outlook, X (Twitter), LinkedIn
+  </Card>
+  <Card title="Project management" icon="check-square">
+    Asana — create tasks, manage projects, track progress
+  </Card>
+</CardGroup>
+
+## Featured integrations
+
+<CardGroup cols={3}>
+  <Card title="Gmail" icon="mail" href="/integrations/gmail">
+    Read, search, draft, and send email.
+  </Card>
+  <Card title="Google Calendar" icon="calendar" href="/integrations/google-calendar">
+    View, create, and update events.
+  </Card>
+  <Card title="Notion" icon="book-open" href="/integrations/notion">
+    Read pages, create content, search your workspace.
+  </Card>
+  <Card title="GitHub" icon="github" href="/integrations/github">
+    List PRs, read issues, search repositories.
+  </Card>
+  <Card title="Slack" icon="slack" href="/integrations/slack">
+    Post messages and read recent activity.
+  </Card>
+  <Card title="MCP Servers" icon="server" href="/integrations/mcp-servers">
+    Extend Overlay with custom tool servers.
+  </Card>
+</CardGroup>
+
+## How integrations work
+
+Integrations are available in **Act mode only**. When you switch a conversation to Act mode, the AI gains access to any tools provided by your connected apps. You describe what you want in plain language — Overlay's AI figures out which tool to call and what parameters to pass.
+
+<Note>
+  Integrations are **not active in Ask mode**. Switch to Act mode in the chat input to use any connected app.
+</Note>
+
+## MCP servers
+
+In addition to Composio-backed integrations, Overlay supports **MCP (Model Context Protocol) servers** — external tool servers you configure yourself. MCP servers are an advanced option for users who need custom tooling beyond the built-in catalog.
+
+See [MCP Servers](/integrations/mcp-servers) for setup instructions.
+
+## Beyond integrations: built-in execution
+
+Overlay also includes two built-in execution capabilities that do not require connecting an external account:
+
+- **Browser Use** — AI-controlled browser for live web tasks. See [Browser automation](/integrations/browser-use).
+- **Code execution** — Run code in isolated Daytona sandboxes. See [Code execution](/integrations/code-execution).

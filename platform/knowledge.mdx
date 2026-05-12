@@ -1,0 +1,104 @@
+---
+title: "Build a searchable knowledge base from your documents"
+sidebarTitle: "Knowledge"
+description: "Upload files, organize them into folders, and search across your documents with hybrid semantic and keyword retrieval in every conversation."
+---
+
+The Knowledge base is your personal document library inside Overlay. Upload files, organize them into folders, and Overlay indexes them for retrieval — so any conversation can pull from your documents without you pasting content manually. The AI searches your knowledge base automatically when answering questions, or you can reference specific files explicitly.
+
+## Uploading files
+
+<Steps>
+  <Step title="Open Knowledge">
+    Click **Knowledge** in the left sidebar.
+  </Step>
+  <Step title="Upload a file">
+    Click **Upload** and select one or more files from your device. You can also drag files into the Knowledge view.
+  </Step>
+  <Step title="Wait for indexing">
+    Overlay processes and indexes each file after upload. Indexing takes a few seconds for short documents and longer for large files. Once complete, the file is searchable and available in chat.
+  </Step>
+</Steps>
+
+<Info>
+  You can upload multiple files at once. Large files are chunked automatically for efficient retrieval.
+</Info>
+
+## Organizing with folders
+
+Folders let you group related files so your Knowledge base stays navigable as it grows.
+
+<Steps>
+  <Step title="Create a folder">
+    Click **New folder** in the Knowledge view and give it a name.
+  </Step>
+  <Step title="Move files into the folder">
+    Drag files into the folder, or use the file menu to move them.
+  </Step>
+  <Step title="Browse the file tree">
+    Use the folder tree in the sidebar to navigate between folders. Files inside folders are still indexed and searchable across your entire Knowledge base.
+  </Step>
+</Steps>
+
+<Tip>
+  Organize files by project or topic to make it easier to find them later. When you attach a folder to a project, all files in that folder become available as project context.
+</Tip>
+
+## Supported file types
+
+Overlay accepts the following file formats for indexing:
+
+| Category | Formats |
+|---|---|
+| Documents | PDF, DOCX, TXT, MD |
+| Spreadsheets | CSV, XLSX |
+| Code | Most plain-text source file types |
+| Web | HTML, XML |
+
+<Note>
+  Image files can be stored in Knowledge but are not indexed for text retrieval. To analyze an image with a vision model, attach it directly to a chat message instead.
+</Note>
+
+## Searching your knowledge
+
+Use the search bar at the top of the Knowledge view to search across all your uploaded files. Overlay runs a hybrid search that combines:
+
+- **Semantic search** — finds content based on meaning and intent, not just exact words
+- **Keyword search** — matches specific terms and phrases you enter
+
+Results rank by relevance, so the most useful chunks surface first even if they do not contain the exact words you searched.
+
+## Using knowledge in chat
+
+You do not need to do anything special to access your knowledge in conversations. When you send a message, Overlay's retrieval system searches your knowledge base automatically and provides relevant chunks to the model as context.
+
+You can also reference knowledge more explicitly:
+
+<Tabs>
+  <Tab title="Automatic retrieval">
+    Ask a question that relates to content in your knowledge base. For example, if you have uploaded a product spec, asking "What are the technical requirements from the spec?" will trigger retrieval and the model will ground its answer in that document.
+  </Tab>
+  <Tab title="Attach a specific file">
+    Click the attachment icon in the chat input and select a file from your Knowledge base. This pins that file as context for the current message, regardless of what the retrieval system would have surfaced automatically.
+  </Tab>
+</Tabs>
+
+## Best practices
+
+<AccordionGroup>
+  <Accordion title="What should I store in Knowledge vs Memory?">
+    Store reference material, documents, and source files in Knowledge. Store personal preferences, facts about yourself, and standing instructions in Memory. Knowledge is for content you retrieve; Memory is for context that shapes how the AI behaves.
+  </Accordion>
+  <Accordion title="How should I organize files for best retrieval?">
+    Use clear file names that describe the content. Group related files in folders. Avoid uploading duplicate versions of the same document — update the file in place if it changes. Well-named, focused documents retrieve more reliably than large multi-topic files.
+  </Accordion>
+  <Accordion title="Can I edit files after uploading?">
+    Supported text-based files can be edited directly inside the Knowledge view. Edits trigger automatic re-indexing so the updated content is available in retrieval immediately.
+  </Accordion>
+  <Accordion title="How is knowledge different from attaching a file to a message?">
+    Files attached to a message are included in that single turn only. Files in your Knowledge base are indexed permanently and can be retrieved in any future conversation. Use Knowledge for documents you reference often; use message attachments for one-off context.
+  </Accordion>
+  <Accordion title="Is my knowledge base scoped per project?">
+    The Knowledge base is account-wide, but you can associate files and folders with a specific project. Inside a project, the AI automatically draws from that project's linked files. See the Projects page for details.
+  </Accordion>
+</AccordionGroup>

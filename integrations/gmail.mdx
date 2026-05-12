@@ -1,0 +1,79 @@
+---
+title: "Read and send Gmail from Overlay's Act mode in chat"
+sidebarTitle: "Gmail"
+description: "Connect Gmail to read, search, draft, and send emails from Overlay's Act mode — with support for thread summarization and label management."
+---
+
+The Gmail integration gives Overlay's AI direct access to your inbox. Once connected, you can ask the AI to read your emails, search for specific messages, draft replies, and send email — all without leaving your workspace.
+
+## What you can do
+
+<CardGroup cols={2}>
+  <Card title="Read emails" icon="mail">
+    Retrieve the full content of any email by sender, subject, or date.
+  </Card>
+  <Card title="Search your inbox" icon="search">
+    Search by keyword, sender, label, or date range.
+  </Card>
+  <Card title="Draft emails" icon="file-text">
+    Ask the AI to write a draft you can review before sending.
+  </Card>
+  <Card title="Send emails" icon="send">
+    Send messages directly, with the AI composing the content.
+  </Card>
+  <Card title="Manage labels" icon="tag">
+    Apply, remove, or search by Gmail labels.
+  </Card>
+  <Card title="Summarize threads" icon="layers">
+    Get a summary of long email threads in seconds.
+  </Card>
+</CardGroup>
+
+## How to connect Gmail
+
+<Steps>
+  <Step title="Open Integrations">
+    Click **Integrations** in the left sidebar.
+  </Step>
+  <Step title="Find Gmail">
+    Locate **Gmail** in the Available list, or use the search bar to find it.
+  </Step>
+  <Step title="Click Connect">
+    Click **Connect**. A new tab opens with Google's OAuth screen.
+  </Step>
+  <Step title="Sign in and authorize">
+    Sign in to the Google account whose inbox you want to connect. Review the permissions and click **Allow**.
+  </Step>
+  <Step title="Return to Overlay">
+    Once authorized, the tab closes and Gmail appears in your Connected list. Switch to Act mode in any chat to start using it.
+  </Step>
+</Steps>
+
+## Example prompts
+
+Use these in Act mode to get started:
+
+- "Summarize my unread emails from today."
+- "Find the email from Jane about the proposal and show me what she said."
+- "Draft a reply to the latest email from the sales team asking for an update."
+- "Send an email to alex@example.com with the subject 'Meeting tomorrow' and confirm we're still on for 2 PM."
+- "Show me all emails with the label 'Invoices' from last month."
+- "Archive all newsletters I received this week."
+
+## Permissions required
+
+When you connect Gmail, Google will ask you to grant the following access:
+
+| Permission | Why Overlay needs it |
+|---|---|
+| Read email messages | To retrieve and summarize emails on your behalf |
+| Compose and send email | To draft and send messages when you ask |
+| Manage labels | To apply or remove labels when requested |
+
+<Note>
+  Overlay requests only the permissions needed to complete the actions you ask for. Your email content is processed by the AI model you select and is subject to that provider's data handling terms.
+</Note>
+
+<Warning>
+  Sending emails through Act mode is an irreversible action. Always review the content the AI drafts before asking it to send.
+</Warning>

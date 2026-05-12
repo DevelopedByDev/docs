@@ -1,0 +1,78 @@
+---
+title: "Add custom MCP servers to extend Overlay's AI tools"
+sidebarTitle: "MCP servers"
+description: "Add Model Context Protocol servers to connect Overlay's AI to custom APIs, internal tools, or any service not in the built-in integration catalog."
+---
+
+MCP (Model Context Protocol) servers are external tool servers that you configure in Overlay to extend what the AI can do. While the built-in integrations cover 100+ popular apps, MCP servers let you connect Overlay to custom APIs, internal tools, databases, or any service that exposes an MCP-compatible endpoint.
+
+This is an advanced feature aimed at users who want to build or use custom tooling on top of Overlay's AI.
+
+## What MCP servers can do
+
+An MCP server exposes a set of tools — functions the AI can call during a conversation in Act mode. Examples of what community and custom MCP servers can provide:
+
+- Query an internal database or data warehouse
+- Interact with a proprietary API not in the Composio catalog
+- Run specialized calculations or data transformations
+- Fetch real-time data from a custom source
+- Integrate with on-premise systems that require local network access
+
+Once a server is connected and active, the AI treats its tools the same way it treats built-in integration tools — calling them automatically when relevant during an Act mode conversation.
+
+## Add an MCP server
+
+<Steps>
+  <Step title="Open Settings">
+    Click **Settings** in the left sidebar, then select **MCP Servers**.
+  </Step>
+  <Step title="Click Add Server">
+    Click the **Add Server** button in the top right of the MCP Servers view.
+  </Step>
+  <Step title="Enter the server details">
+    Fill in the required fields:
+
+    - **Name** — a label to identify this server in your workspace (e.g. `My API Server`)
+    - **URL** — the full URL of the MCP endpoint (e.g. `https://myserver.example.com/mcp`)
+    - **Transport** — choose **Streamable HTTP** (recommended) or **SSE**
+    - **Authentication** — select None, Bearer Token, or Custom Header depending on your server's requirements
+  </Step>
+  <Step title="Test the connection">
+    Click **Test Connection** to verify that Overlay can reach the server. A successful test shows the number of tools the server exposes.
+  </Step>
+  <Step title="Save and activate">
+    Click **Add Server**. The server is added to your list with an active status indicator. Enabled servers are immediately available in Act mode.
+  </Step>
+</Steps>
+
+<Note>
+  HTTPS is required for all MCP server URLs in production. HTTP is only permitted for `localhost` during local development.
+</Note>
+
+## Manage existing servers
+
+From the MCP Servers view, you can:
+
+- **Enable or disable** a server using the toggle icon on each server card, or the toggle inside the edit dialog. Disabled servers are not available to the AI.
+- **Edit** a server's name, URL, transport type, or auth configuration by clicking the pencil icon or clicking on the server card.
+- **Delete** a server by opening its edit dialog and clicking **Delete**.
+
+## Authentication options
+
+| Option | When to use |
+|---|---|
+| None | The MCP server is publicly accessible or uses network-level auth |
+| Bearer Token | The server requires an `Authorization: Bearer <token>` header |
+| Custom Header | The server uses a non-standard auth header (e.g. `X-Api-Key`) |
+
+<Warning>
+  Bearer tokens and header values are stored securely, but treat them like passwords. Do not share your Overlay workspace access with untrusted parties if your MCP servers hold sensitive credentials.
+</Warning>
+
+## Timeout setting
+
+You can configure a request timeout in milliseconds for each server. If the server does not respond within this window, the tool call fails and the AI reports an error. The default is 30,000 ms (30 seconds).
+
+<Tip>
+  If you are running a server that performs heavy computation or external lookups, increase the timeout to avoid premature failures.
+</Tip>
